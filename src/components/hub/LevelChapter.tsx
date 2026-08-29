@@ -42,11 +42,13 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
 
       <div className="relative">
         <header className="px-6">
-          <h2 className="font-serif text-[clamp(56px,20vw,110px)] leading-[0.85] tracking-[-0.02em]">
+          <span className="block h-px w-10 bg-current/40" aria-hidden />
+          <h2 className="mt-6 font-serif text-[clamp(56px,21vw,116px)] leading-[0.82] tracking-[-0.03em]">
             {title}
           </h2>
-          <p className="mt-4 text-[13px] tracking-[0.18em] opacity-60">{line}</p>
+          <p className="mt-5 text-[12px] tracking-[0.24em] opacity-55">{line.toUpperCase()}</p>
         </header>
+
 
         {clusters && (
           <div className="mt-10 flex gap-6 px-6">

@@ -23,15 +23,19 @@ export function DestinationPanel({ dest }: { dest: Destination }) {
           loading="lazy"
           width={900}
           height={1400}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5 text-[oklch(0.98_0_0)]">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        <span className="pointer-events-none absolute inset-3 border border-[oklch(1_0_0/0.16)]" aria-hidden />
+        <div className="absolute inset-x-0 bottom-0 p-6 text-[oklch(0.98_0_0)]">
           <p className="text-[9px] tracking-[0.34em] opacity-70">{dest.type.toUpperCase()}</p>
-          <h3 className="mt-2 font-serif text-[26px] leading-[1.05] tracking-tight">{dest.name}</h3>
-          <p className="mt-1.5 text-[12px] leading-snug opacity-75">{dest.short_description}</p>
+          <h3 className="mt-2 font-serif text-[28px] leading-[1.02] tracking-[-0.01em]">{dest.name}</h3>
+          <p className="mt-2 max-w-[32ch] text-[12px] leading-relaxed opacity-75">
+            {dest.short_description}
+          </p>
         </div>
       </div>
+
 
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
         {actions.map((a) => (
