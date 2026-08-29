@@ -59,56 +59,37 @@ function Hub() {
     <main className="bg-background text-foreground">
       <NamTramRail active={active} progress={progress} onJump={jump} />
 
-      {/* ARRIVAL */}
-      <section className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden">
+      {/* THRESHOLD */}
+      <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden">
         <img
           src={heavenImg}
-          alt="InterContinental Danang Sun Peninsula Resort"
+          alt="InterContinental Danang Sun Peninsula Resort seen from above the bay"
           width={900}
           height={1400}
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.55]"
+          className="threshold-img absolute inset-0 h-full w-full object-cover opacity-[0.6]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.99_0.005_90/0.75)] via-[oklch(0.99_0.005_90/0.4)] to-[oklch(0.99_0.005_90/0.95)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.99_0.005_90/0.82)] via-[oklch(0.99_0.005_90/0.35)] to-[oklch(0.985_0.008_90/0.98)]" />
+        <div className="grain pointer-events-none absolute inset-0" aria-hidden />
 
-        <header className="relative px-6 pt-16">
-          <p className="text-[9px] tracking-[0.42em] opacity-60">SUN PENINSULA · DA NANG</p>
-          <h1 className="mt-6 font-serif text-[clamp(38px,11vw,60px)] leading-[0.95] tracking-tight">
-            InterContinental
+        <button
+          onClick={() => jump("heaven")}
+          className="relative flex flex-col items-center gap-6 px-6 text-center"
+        >
+          <span className="reveal text-[10px] tracking-[0.46em] opacity-55 [animation-delay:120ms]">
+            SUN PENINSULA · DA NANG
+          </span>
+          <h1 className="reveal font-serif text-[clamp(40px,13vw,68px)] leading-[0.92] tracking-[-0.02em] [animation-delay:260ms]">
+            Begin
             <br />
-            Danang
+            the Descent
           </h1>
-          <p className="mt-5 max-w-[24ch] text-[13px] leading-relaxed opacity-65">
-            A resort built on four levels. Scroll to descend from Heaven to Sea.
-          </p>
-        </header>
-
-        <div className="relative px-6 pb-14">
-          <ul className="flex flex-col divide-y divide-current/10 border-y border-current/10">
-            {GLOBAL_LINKS.map((l) => (
-              <li key={l.id}>
-                <a
-                  href={l.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between py-3 text-[11px] tracking-[0.22em]"
-                >
-                  {l.label.toUpperCase()}
-                  <span className="opacity-40">↗</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <button
-            onClick={() => jump("heaven")}
-            className="mt-12 flex w-full flex-col items-center gap-3"
-          >
-            <span className="text-[10px] tracking-[0.4em]">BEGIN THE DESCENT</span>
-            <span className="h-14 w-px bg-current/40" aria-hidden />
-            <span className="text-[9px] tracking-[0.3em] opacity-50">FROM HEAVEN TO SEA</span>
-          </button>
-        </div>
+          <span className="reveal line-drop h-24 w-px bg-current/40 [animation-delay:520ms]" aria-hidden />
+          <span className="reveal text-[9px] tracking-[0.42em] opacity-50 [animation-delay:680ms]">
+            FROM HEAVEN TO SEA
+          </span>
+        </button>
       </section>
+
 
       {/* THE DESCENT */}
       <div ref={journeyRef}>
