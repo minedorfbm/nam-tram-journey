@@ -132,13 +132,112 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@theme inline {
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
   }
 }
+
+/* Four worlds: each level owns its atmosphere. */
+.level {
+  transition:
+    background-color 600ms ease,
+    color 600ms ease;
+}
+
+.level .level-bg {
+  transition: opacity 600ms ease;
+}
+
+.level[data-level="heaven"] {
+  background-color: oklch(0.985 0.008 90);
+  color: oklch(0.16 0.01 90);
+}
+.level[data-level="heaven"] .level-bg {
+  opacity: 0.35;
+}
+.level[data-level="heaven"] .level-veil {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.985 0.008 90 / 0.92),
+    oklch(0.985 0.008 90 / 0.55) 45%,
+    oklch(0.97 0.02 70 / 0.9)
+  );
+}
+
+.level[data-level="sky"] {
+  background-color: oklch(0.93 0.035 70);
+  color: oklch(0.2 0.03 50);
+}
+.level[data-level="sky"] .level-bg {
+  opacity: 0.5;
+}
+.level[data-level="sky"] .level-veil {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.97 0.02 70 / 0.9),
+    oklch(0.93 0.04 65 / 0.5) 45%,
+    oklch(0.42 0.05 150 / 0.85)
+  );
+}
+
+.level[data-level="earth"] {
+  background-color: oklch(0.28 0.045 150);
+  color: oklch(0.95 0.01 120);
+}
+.level[data-level="earth"] .level-bg {
+  opacity: 0.45;
+}
+.level[data-level="earth"] .level-veil {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.42 0.05 150 / 0.9),
+    oklch(0.25 0.05 155 / 0.6) 45%,
+    oklch(0.18 0.045 240 / 0.92)
+  );
+}
+
+.level[data-level="sea"] {
+  background-color: oklch(0.15 0.04 245);
+  color: oklch(0.94 0.01 230);
+}
+.level[data-level="sea"] .level-bg {
+  opacity: 0.5;
+}
+.level[data-level="sea"] .level-veil {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.18 0.045 240 / 0.9),
+    oklch(0.14 0.04 245 / 0.6) 45%,
+    oklch(0.16 0.03 250 / 0.95)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
