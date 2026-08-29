@@ -123,7 +123,7 @@ function Hub() {
           All of InterContinental Danang
         </h2>
         <ul className="mt-8 flex flex-col divide-y divide-current/10 border-y border-current/10">
-          {[
+          {([
             ["Website", OFFICIAL.website],
             ["Instagram", OFFICIAL.instagram],
             ["Dining", OFFICIAL.dining],
@@ -131,7 +131,7 @@ function Hub() {
             ["IHG One Rewards", OFFICIAL.ihg],
             ["Resort Map", OFFICIAL.map],
             ["Contact", OFFICIAL.contact],
-          ].map(([label, url]) => (
+          ] as [string, string][]).map(([label, url]) => (
             <li key={label}>
               <a
                 href={url}
