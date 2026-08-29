@@ -6,11 +6,19 @@ interface Props {
   onJump: (level: Level) => void;
 }
 
+const RAIL_COLOR: Record<Level, string> = {
+  heaven: "oklch(0.18 0.01 90)",
+  sky: "oklch(0.2 0.03 50)",
+  earth: "oklch(0.95 0.01 120)",
+  sea: "oklch(0.94 0.01 230)",
+};
+
 export function NamTramRail({ active, progress, onJump }: Props) {
   return (
     <nav
       aria-label="Resort levels"
-      className="fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none"
+      className="fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none transition-colors duration-500"
+      style={{ color: RAIL_COLOR[active] }}
     >
       <div className="relative flex flex-col items-end gap-9 py-2">
         {/* rail line */}
