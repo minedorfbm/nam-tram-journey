@@ -126,7 +126,24 @@ function Hub() {
             </li>
           ))}
         </ul>
-        <p className="mt-14 text-[9px] tracking-[0.3em] opacity-40">
+
+        <p className="mt-12 text-[9px] tracking-[0.34em] opacity-45">GUEST SERVICES</p>
+        <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
+          {GLOBAL_LINKS.map((l) => (
+            <li key={l.id}>
+              <a
+                href={l.url}
+                target="_blank"
+                rel="noreferrer"
+                className="border-b border-current/25 pb-0.5 text-[10px] tracking-[0.26em] opacity-80"
+              >
+                {l.label.toUpperCase()}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-16 text-[9px] tracking-[0.3em] opacity-40">
           DIGITAL EXPERIENCE BY ART DIGITAL JOURNEY
         </p>
       </section>
