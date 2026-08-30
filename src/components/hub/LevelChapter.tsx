@@ -73,7 +73,7 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
           {showAll ? "ALL DESTINATIONS" : "FEATURED DESTINATIONS"} · SWIPE →
         </p>
 
-        <div className="mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-6 pt-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
           {list.map((dest) => (
             <DestinationPanel key={dest.id} dest={dest} />
           ))}
