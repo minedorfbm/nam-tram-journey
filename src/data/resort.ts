@@ -2,6 +2,18 @@ import heavenImg from "@/assets/heaven.jpg";
 import skyImg from "@/assets/sky.jpg";
 import earthImg from "@/assets/earth.jpg";
 import seaImg from "@/assets/sea.jpg";
+import dFrenchDining from "@/assets/d-french-dining.jpg";
+import dCitron from "@/assets/d-citron.jpg";
+import dBar from "@/assets/d-bar.jpg";
+import dWine from "@/assets/d-wine.jpg";
+import dSpa from "@/assets/d-spa.jpg";
+import dPool from "@/assets/d-pool.jpg";
+import dBeach from "@/assets/d-beach.jpg";
+import dVilla from "@/assets/d-villa.jpg";
+import dGym from "@/assets/d-gym.jpg";
+import dGallery from "@/assets/d-gallery.jpg";
+import dTram from "@/assets/d-tram.jpg";
+import dRetail from "@/assets/d-retail.jpg";
 
 /**
  * CMS-ready data layer.
@@ -40,7 +52,6 @@ export interface Destination {
   instagram_url?: string;
   booking_message?: string;
   display_order: number;
-  featured: boolean;
   active: boolean;
 }
 
@@ -107,6 +118,39 @@ export const LEVELS: {
 
 const w = OFFICIAL.website;
 
+/** Default photography per content type. */
+const TYPE_IMAGE: Record<DestinationType, string> = {
+  restaurant: dFrenchDining,
+  bar: dBar,
+  spa: dSpa,
+  experience: dGallery,
+  pool: dPool,
+  fitness: dGym,
+  kids: dBeach,
+  retail: dRetail,
+  gallery: dGallery,
+  accommodation: dVilla,
+  service: dVilla,
+  beach: dBeach,
+  recreation: dBeach,
+};
+
+/** Specific photography overrides by destination id. */
+const IMAGE_BY_ID: Record<string, string> = {
+  citron: dCitron,
+  "wine-cellar": dWine,
+  tingara: dCitron,
+  "nam-tram": dTram,
+  "the-summit": dTram,
+  "apec-garden": dGallery,
+  "bensley-gallery": dGallery,
+  "organic-garden": dGallery,
+  "dia-tang": dGallery,
+  "yoga-pavilion": dSpa,
+  nursery: dSpa,
+  "terra-mare": dFrenchDining,
+};
+
 const d = (
   id: string,
   name: string,
@@ -121,10 +165,11 @@ const d = (
   level,
   type,
   short_description,
-  image: LEVELS.find((l) => l.id === level)!.image,
+  image: IMAGE_BY_ID[id] ?? TYPE_IMAGE[type],
   discover_url: w,
+  // restaurants surface the resort's Instagram presence
+  ...(type === "restaurant" ? { instagram_url: OFFICIAL.instagram } : {}),
   display_order: order,
-  featured: order <= 4,
   active: true,
   ...extra,
 });

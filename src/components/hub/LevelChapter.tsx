@@ -12,7 +12,6 @@ interface Props {
 }
 
 export function LevelChapter({ id, title, line, image, clusters }: Props) {
-  const [showAll, setShowAll] = useState(false);
   const [cluster, setCluster] = useState(clusters?.[0]);
 
   const all = useMemo(
@@ -23,8 +22,7 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
     [id],
   );
 
-  const scoped = clusters ? all.filter((d) => d.cluster === cluster) : all;
-  const list = showAll ? scoped : scoped.filter((d) => d.featured || scoped.length <= 4);
+  const list = clusters ? all.filter((d) => d.cluster === cluster) : all;
 
   return (
     <section id={id} data-level={id} className="level relative min-h-[100svh] py-24">
@@ -56,10 +54,7 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
             {clusters.map((c) => (
               <button
                 key={c}
-                onClick={() => {
-                  setCluster(c);
-                  setShowAll(false);
-                }}
+                onClick={() => setCluster(c)}
                 className={`border-b pb-1 text-[10px] tracking-[0.3em] transition-opacity ${
                   c === cluster ? "border-current opacity-100" : "border-transparent opacity-40"
                 }`}
@@ -70,23 +65,13 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
           </div>
         )}
 
-        <p className="mt-10 px-6 text-[9px] tracking-[0.34em] opacity-45">
-          {showAll ? "ALL DESTINATIONS" : "FEATURED DESTINATIONS"} · SWIPE →
+        <p className="mt-10 px-6 text-[9px] tracking-[0.34em] opacity-40">
+          {list.length} PLACES · SWIPE →
         </p>
 
         <div className="mt-5 overflow-hidden">
           <CardStack items={list} />
         </div>
-
-
-        {scoped.length > list.length && (
-          <button
-            onClick={() => setShowAll(true)}
-            className="mt-6 ml-6 border-b border-current/40 pb-1 text-[10px] tracking-[0.3em] opacity-70"
-          >
-            VIEW ALL
-          </button>
-        )}
       </div>
     </section>
   );

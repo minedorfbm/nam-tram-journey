@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import { CTA_BY_TYPE, bookingLink, type Destination } from "@/data/resort";
 
 function actionHref(action: string, dest: Destination) {
@@ -30,10 +31,10 @@ export function DestinationPanel({
         alt={dest.name}
         loading="lazy"
         draggable={false}
-        width={900}
-        height={1400}
+        width={768}
+        height={1152}
         className={`h-full w-full select-none object-cover transition-[filter,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          active ? "scale-100" : "scale-[1.04] brightness-[0.62] saturate-[0.7]"
+          active ? "scale-100" : "scale-[1.03] brightness-[0.68] saturate-[0.75]"
         }`}
       />
 
@@ -74,10 +75,11 @@ export function DestinationPanel({
                 href={dest.instagram_url}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={`${dest.name} on Instagram`}
                 tabIndex={active ? 0 : -1}
-                className="text-[10px] tracking-[0.3em] opacity-55"
+                className="grid size-8 -my-1 place-items-center rounded-full border border-current/30 opacity-80 transition-opacity hover:opacity-50"
               >
-                IG ↗
+                <Instagram className="size-3.5" strokeWidth={1.5} />
               </a>
             )}
           </div>
