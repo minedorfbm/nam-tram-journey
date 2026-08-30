@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
-import { DestinationPanel } from "./DestinationPanel";
+import { CardStack } from "./CardStack";
 import { DESTINATIONS, type Level } from "@/data/resort";
+
 
 interface Props {
   id: Level;
@@ -73,12 +74,10 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
           {showAll ? "ALL DESTINATIONS" : "FEATURED DESTINATIONS"} · SWIPE →
         </p>
 
-        <div className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-6 pt-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
-          {list.map((dest) => (
-            <DestinationPanel key={dest.id} dest={dest} />
-          ))}
-          <span className="w-2 shrink-0" aria-hidden />
+        <div className="mt-5 overflow-hidden">
+          <CardStack items={list} />
         </div>
+
 
         {scoped.length > list.length && (
           <button

@@ -3,6 +3,8 @@ import { CTA_BY_TYPE, bookingLink, type Destination } from "@/data/resort";
 function actionHref(action: string, dest: Destination) {
   switch (action) {
     case "MENU":
+    case "TREATMENTS":
+    case "ACTIVITIES":
       return dest.menu_url ?? dest.discover_url;
     case "BOOK":
       return bookingLink(dest);
@@ -11,51 +13,58 @@ function actionHref(action: string, dest: Destination) {
   }
 }
 
-export function DestinationPanel({ dest }: { dest: Destination }) {
+/** The single universal card used everywhere in the hub. */
+export function DestinationPanel({
+  dest,
+  active,
+}: {
+  dest: Destination;
+  active: boolean;
+}) {
   const actions = CTA_BY_TYPE[dest.type].slice(0, 3);
 
   return (
-    <article className="w-[82vw] max-w-[340px] shrink-0 snap-center">
-      <div className="relative aspect-[3/4.4] overflow-hidden rounded-[22px] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.55)]">
-        <img
-          src={dest.image}
-          alt={dest.name}
-          loading="lazy"
-          width={900}
-          height={1400}
-          className="h-full w-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04]"
-        />
+    <article className="relative h-full w-full overflow-hidden rounded-[26px] bg-black shadow-[0_30px_70px_-30px_rgba(0,0,0,0.65)]">
+      <img
+        src={dest.image}
+        alt={dest.name}
+        loading="lazy"
+        draggable={false}
+        width={900}
+        height={1400}
+        className={`h-full w-full select-none object-cover transition-[filter,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          active ? "scale-100" : "scale-[1.04] brightness-[0.62] saturate-[0.7]"
+        }`}
+      />
 
-        {/* soft legibility veils */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/5 to-black/60" />
-        <span
-          className="pointer-events-none absolute inset-2.5 rounded-[16px] border border-white/25"
-          aria-hidden
-        />
+      {/* readability gradient only at the bottom */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[28%] bg-gradient-to-b from-black/40 to-transparent" />
 
-        {/* content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-between p-7 pt-12 text-center text-white">
-          <div className="flex flex-col items-center">
-            <p className="text-[9px] tracking-[0.42em] opacity-80">
-              {dest.level.toUpperCase()} / {dest.type.toUpperCase()}
-            </p>
-            <h3 className="mt-4 font-serif text-[clamp(26px,8vw,36px)] leading-[1.02] tracking-[0.02em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
-              {dest.name}
-            </h3>
-            <span className="mt-4 h-px w-8 bg-white/50" aria-hidden />
-            <p className="mt-4 max-w-[28ch] font-serif text-[15px] italic leading-relaxed opacity-90">
-              {dest.short_description}
-            </p>
-          </div>
+      <div className="absolute inset-0 flex flex-col justify-between p-7 text-[oklch(0.98_0.005_90)]">
+        <p className="text-[9px] tracking-[0.42em] opacity-80">
+          {dest.type.toUpperCase()}
+        </p>
 
-          <div className="flex w-full items-center justify-center gap-x-7">
+        <div
+          className={`transition-opacity duration-500 ${active ? "opacity-100" : "opacity-60"}`}
+        >
+          <h3 className="font-serif text-[clamp(28px,8.5vw,40px)] leading-[0.98] tracking-[0.01em] drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)]">
+            {dest.name}
+          </h3>
+          <p className="mt-3 max-w-[30ch] font-serif text-[15px] italic leading-snug opacity-85">
+            {dest.short_description}
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
             {actions.map((a) => (
               <a
                 key={a}
                 href={actionHref(a, dest)}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[10px] tracking-[0.32em] drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] transition-opacity hover:opacity-60"
+                tabIndex={active ? 0 : -1}
+                className="text-[10px] tracking-[0.3em] transition-opacity hover:opacity-60"
               >
                 {a}
               </a>
@@ -65,7 +74,8 @@ export function DestinationPanel({ dest }: { dest: Destination }) {
                 href={dest.instagram_url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[10px] tracking-[0.32em] opacity-60"
+                tabIndex={active ? 0 : -1}
+                className="text-[10px] tracking-[0.3em] opacity-55"
               >
                 IG ↗
               </a>
