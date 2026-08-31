@@ -28,14 +28,15 @@ function slotAt(pos: number): [number, number, number, number] {
   if (pos <= -1) return EXIT;
   if (pos < 0) {
     const t = pos + 1; // -1..0
+    const a = SLOTS[0]!;
     return [
-      lerp(EXIT[0], SLOTS[0][0], t),
-      lerp(EXIT[1], SLOTS[0][1], t),
-      lerp(EXIT[2], SLOTS[0][2], t),
-      pos > -0.5 ? 50 : SLOTS[0][3],
+      lerp(EXIT[0], a[0], t),
+      lerp(EXIT[1], a[1], t),
+      lerp(EXIT[2], a[2], t),
+      pos > -0.5 ? 50 : a[3],
     ];
   }
-  if (pos >= VISIBLE - 1) return SLOTS[VISIBLE - 1];
+  if (pos >= VISIBLE - 1) return SLOTS[VISIBLE - 1]!;
   const i = Math.floor(pos);
   const t = pos - i;
   const a = SLOTS[i]!;
