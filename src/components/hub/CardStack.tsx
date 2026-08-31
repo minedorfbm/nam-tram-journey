@@ -16,7 +16,7 @@ const SLOTS: Array<[number, number, number, number]> = [
   [65, 0.84, 0.52, 20], // third
   [79, 0.77, 0.38, 10], // fourth
 ];
-const EXIT: [number, number, number, number] = [-46, 1, 0.9, 50]; // card swiping away
+const EXIT: [number, number, number, number] = [-84, 0.99, 0.9, 50]; // card swiping away, fully off-stage
 const VISIBLE = SLOTS.length;
 
 function lerp(a: number, b: number, t: number) {
