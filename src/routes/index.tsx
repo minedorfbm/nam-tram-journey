@@ -31,25 +31,37 @@ function Hub() {
   const journeyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Continuous descent progress for the gold rail fill
     const onScroll = () => {
       const el = journeyRef.current;
       if (!el) return;
       const top = el.offsetTop;
       const p = (window.scrollY + window.innerHeight * 0.5 - top) / el.offsetHeight;
       setProgress(Math.min(1, Math.max(0, p)));
-
-      let current: Level = "heaven";
-      for (const l of LEVELS) {
-        const node = document.getElementById(l.id);
-        if (node && node.getBoundingClientRect().top <= window.innerHeight * 0.45) {
-          current = l.id;
-        }
-      }
-      setActive(current);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    // Active station detection via IntersectionObserver
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id as Level);
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    for (const l of LEVELS) {
+      const node = document.getElementById(l.id);
+      if (node) observer.observe(node);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const jump = (level: Level) =>
