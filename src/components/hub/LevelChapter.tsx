@@ -66,7 +66,7 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
         )}
 
         <p className="mt-10 px-6 text-[9px] tracking-[0.34em] opacity-40">
-          {list.length} PLACES · SWIPE →
+          {list.length} PLACES · SWIPE → · TAP TO OPEN
         </p>
 
         <div className="mt-5 overflow-hidden">
