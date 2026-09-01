@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DestinationPanel } from "./DestinationPanel";
+import { DestinationDetail } from "./DestinationDetail";
 import type { Destination } from "@/data/resort";
 
 /**
@@ -55,6 +56,8 @@ export function CardStack({ items }: { items: Destination[] }) {
   const [index, setIndex] = useState(0);
   const [drag, setDrag] = useState(0); // px, negative = pulling next card in
   const [dragging, setDragging] = useState(false);
+  const [open, setOpen] = useState<Destination | null>(null);
+  const moved = useRef(false);
   const start = useRef<{
     x: number;
     y: number;
@@ -76,6 +79,7 @@ export function CardStack({ items }: { items: Destination[] }) {
   const clamp = (i: number) => Math.min(last, Math.max(0, i));
 
   const onDown = (e: React.PointerEvent) => {
+    moved.current = false;
     start.current = {
       x: e.clientX,
       y: e.clientY,
@@ -101,6 +105,7 @@ export function CardStack({ items }: { items: Destination[] }) {
         (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
       }
     }
+    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) moved.current = true;
     if (!s.locked) return;
 
     const dt = Math.max(1, e.timeStamp - s.lastT);
@@ -161,6 +166,13 @@ export function CardStack({ items }: { items: Destination[] }) {
                 transition: dragging
                   ? "none"
                   : "transform 600ms cubic-bezier(0.22,1,0.36,1), filter 600ms ease, opacity 420ms ease",
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                if (moved.current) return;
+                if ((e.target as HTMLElement).closest("a")) return;
+                if (active) setOpen(dest);
+                else setIndex(i);
               }}
             >
               <DestinationPanel dest={dest} active={active} />
@@ -181,6 +193,8 @@ export function CardStack({ items }: { items: Destination[] }) {
           />
         ))}
       </div>
+
+      {open && <DestinationDetail dest={open} onClose={() => setOpen(null)} />}
     </div>
   );
 }
