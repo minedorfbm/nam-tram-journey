@@ -79,6 +79,7 @@ export function CardStack({ items }: { items: Destination[] }) {
   const clamp = (i: number) => Math.min(last, Math.max(0, i));
 
   const onDown = (e: React.PointerEvent) => {
+    moved.current = false;
     start.current = {
       x: e.clientX,
       y: e.clientY,
