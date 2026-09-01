@@ -166,6 +166,13 @@ export function CardStack({ items }: { items: Destination[] }) {
                 transition: dragging
                   ? "none"
                   : "transform 600ms cubic-bezier(0.22,1,0.36,1), filter 600ms ease, opacity 420ms ease",
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                if (moved.current) return;
+                if ((e.target as HTMLElement).closest("a")) return;
+                if (active) setOpen(dest);
+                else setIndex(i);
               }}
             >
               <DestinationPanel dest={dest} active={active} />
