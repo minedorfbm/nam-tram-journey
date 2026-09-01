@@ -149,10 +149,10 @@ function Hub() {
       <a
         href={OFFICIAL.contact}
         aria-label="Call concierge"
-        className="fixed bottom-6 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85)] bg-[oklch(0.16_0.03_250)] text-[oklch(0.78_0.11_85)] shadow-[0_6px_24px_oklch(0.16_0.03_250/0.35)] backdrop-blur-sm transition-transform duration-300 ease-out active:scale-90"
+        className="fixed bottom-5 right-3 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.55)] bg-[oklch(0.16_0.03_250/0.78)] text-[oklch(0.78_0.11_85/0.85)] shadow-[0_4px_14px_oklch(0.16_0.03_250/0.22)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.85)] hover:bg-[oklch(0.16_0.03_250/0.88)] active:scale-95"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <Phone size={20} strokeWidth={1.5} />
+        <Phone size={17} strokeWidth={1.4} />
       </a>
     </main>
   );
