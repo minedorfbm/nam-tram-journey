@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DestinationPanel } from "./DestinationPanel";
+import { DestinationDetail } from "./DestinationDetail";
 import type { Destination } from "@/data/resort";
 
 /**
