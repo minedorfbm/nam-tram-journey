@@ -105,6 +105,7 @@ export function CardStack({ items }: { items: Destination[] }) {
         (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
       }
     }
+    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) moved.current = true;
     if (!s.locked) return;
 
     const dt = Math.max(1, e.timeStamp - s.lastT);
