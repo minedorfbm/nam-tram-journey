@@ -193,6 +193,8 @@ export function CardStack({ items }: { items: Destination[] }) {
           />
         ))}
       </div>
+
+      {open && <DestinationDetail dest={open} onClose={() => setOpen(null)} />}
     </div>
   );
 }
