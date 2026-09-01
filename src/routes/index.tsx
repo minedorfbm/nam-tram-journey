@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Phone } from "lucide-react";
 import { LevelChapter } from "@/components/hub/LevelChapter";
 import { NamTramRail } from "@/components/hub/NamTramRail";
-import { GLOBAL_LINKS, LEVELS, OFFICIAL, type Level } from "@/data/resort";
+import { LEVELS, OFFICIAL, type Level } from "@/data/resort";
 import heavenImg from "@/assets/heaven.jpg";
 
 export const Route = createFileRoute("/")({
