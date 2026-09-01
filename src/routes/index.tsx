@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { Phone } from "lucide-react";
 import { LevelChapter } from "@/components/hub/LevelChapter";
 import { NamTramRail } from "@/components/hub/NamTramRail";
-import { GLOBAL_LINKS, LEVELS, OFFICIAL, type Level } from "@/data/resort";
+import { LEVELS, OFFICIAL, type Level } from "@/data/resort";
 import heavenImg from "@/assets/heaven.jpg";
 
 export const Route = createFileRoute("/")({
@@ -128,28 +129,16 @@ function Hub() {
             <li key={label}>
               <a
                 href={url}
-                target="_blank"
-                rel="noreferrer"
+                target={label === "Contact" ? undefined : "_blank"}
+                rel={label === "Contact" ? undefined : "noreferrer"}
                 className="flex items-center justify-between py-3 text-[11px] tracking-[0.22em]"
               >
                 {label.toUpperCase()}
-                <span className="opacity-40">↗</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-12 text-[9px] tracking-[0.34em] opacity-45">GUEST SERVICES</p>
-        <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
-          {GLOBAL_LINKS.map((l) => (
-            <li key={l.id}>
-              <a
-                href={l.url}
-                target="_blank"
-                rel="noreferrer"
-                className="border-b border-current/25 pb-0.5 text-[10px] tracking-[0.26em] opacity-80"
-              >
-                {l.label.toUpperCase()}
+                {label === "Contact" ? (
+                  <Phone size={14} strokeWidth={1.5} className="opacity-50" />
+                ) : (
+                  <span className="opacity-40">↗</span>
+                )}
               </a>
             </li>
           ))}
