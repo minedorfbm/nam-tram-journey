@@ -134,11 +134,7 @@ function Hub() {
                 className="flex items-center justify-between py-3 text-[11px] tracking-[0.22em]"
               >
                 {label.toUpperCase()}
-                {label === "Contact" ? (
-                  <Phone size={14} strokeWidth={1.5} className="opacity-50" />
-                ) : (
-                  <span className="opacity-40">↗</span>
-                )}
+                <span className="opacity-40">↗</span>
               </a>
             </li>
           ))}
@@ -148,6 +144,16 @@ function Hub() {
           DIGITAL EXPERIENCE BY ART DIGITAL JOURNEY
         </p>
       </section>
+
+      {/* FIXED CONCIERGE BUTTON */}
+      <a
+        href={OFFICIAL.contact}
+        aria-label="Call concierge"
+        className="fixed bottom-6 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85)] bg-[oklch(0.16_0.03_250)] text-[oklch(0.78_0.11_85)] shadow-[0_6px_24px_oklch(0.16_0.03_250/0.35)] backdrop-blur-sm transition-transform duration-300 ease-out active:scale-90"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <Phone size={20} strokeWidth={1.5} />
+      </a>
     </main>
   );
 }
