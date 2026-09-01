@@ -56,6 +56,8 @@ export function CardStack({ items }: { items: Destination[] }) {
   const [index, setIndex] = useState(0);
   const [drag, setDrag] = useState(0); // px, negative = pulling next card in
   const [dragging, setDragging] = useState(false);
+  const [open, setOpen] = useState<Destination | null>(null);
+  const moved = useRef(false);
   const start = useRef<{
     x: number;
     y: number;
