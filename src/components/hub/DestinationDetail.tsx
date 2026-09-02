@@ -60,7 +60,7 @@ export function DestinationDetail({
           className="absolute left-5 top-6 flex items-center gap-2 rounded-full border border-current/25 bg-black/25 px-4 py-2 text-[9px] tracking-[0.32em] backdrop-blur-sm transition-opacity hover:opacity-70"
         >
           <ArrowLeft className="size-3" strokeWidth={1.5} />
-          RETOUR
+          BACK
         </button>
 
         <div className="absolute inset-x-0 bottom-0 px-7 pb-8">
@@ -82,16 +82,16 @@ export function DestinationDetail({
 
         <dl className="mt-8 divide-y divide-current/10 border-y border-current/10 text-[10px] tracking-[0.24em]">
           <div className="flex justify-between py-3">
-            <dt className="opacity-45">NIVEAU</dt>
+            <dt className="opacity-45">LEVEL</dt>
             <dd>{dest.level.toUpperCase()}</dd>
           </div>
           <div className="flex justify-between py-3">
-            <dt className="opacity-45">CATÉGORIE</dt>
+            <dt className="opacity-45">CATEGORY</dt>
             <dd>{dest.type.toUpperCase()}</dd>
           </div>
           {dest.cluster && (
             <div className="flex justify-between py-3">
-              <dt className="opacity-45">UNIVERS</dt>
+              <dt className="opacity-45">AREA</dt>
               <dd>{dest.cluster}</dd>
             </div>
           )}
@@ -129,7 +129,7 @@ export function DestinationDetail({
           onClick={onClose}
           className="mt-14 text-[10px] tracking-[0.32em] opacity-55 transition-opacity hover:opacity-90"
         >
-          ← REVENIR AU PARCOURS
+          ← BACK TO THE JOURNEY
         </button>
       </div>
     </div>
