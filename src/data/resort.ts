@@ -151,6 +151,65 @@ const IMAGE_BY_ID: Record<string, string> = {
   "terra-mare": dFrenchDining,
 };
 
+/** Asset registry — maps a CMS `image_key` to the bundled photography. */
+export const ASSET_BY_KEY: Record<string, string> = {
+  heaven: heavenImg,
+  sky: skyImg,
+  earth: earthImg,
+  sea: seaImg,
+  "d-french-dining": dFrenchDining,
+  "d-citron": dCitron,
+  "d-bar": dBar,
+  "d-wine": dWine,
+  "d-spa": dSpa,
+  "d-pool": dPool,
+  "d-beach": dBeach,
+  "d-villa": dVilla,
+  "d-gym": dGym,
+  "d-gallery": dGallery,
+  "d-tram": dTram,
+  "d-retail": dRetail,
+};
+
+/** Row shape returned by the database (see the `destinations` table). */
+export interface DestinationRow {
+  id: string;
+  name: string;
+  level_id: string;
+  cluster: string | null;
+  type: string;
+  short_description: string;
+  image_key: string | null;
+  discover_url: string | null;
+  menu_url: string | null;
+  booking_url: string | null;
+  instagram_url: string | null;
+  booking_message: string | null;
+  display_order: number;
+  active: boolean;
+}
+
+/** Converts a database row into the shape the components already consume. */
+export function toDestination(row: DestinationRow): Destination {
+  const type = row.type as DestinationType;
+  return {
+    id: row.id,
+    name: row.name,
+    level: row.level_id as Level,
+    ...(row.cluster ? { cluster: row.cluster } : {}),
+    type,
+    short_description: row.short_description,
+    image: (row.image_key ? ASSET_BY_KEY[row.image_key] : undefined) ?? TYPE_IMAGE[type],
+    ...(row.discover_url ? { discover_url: row.discover_url } : {}),
+    ...(row.menu_url ? { menu_url: row.menu_url } : {}),
+    ...(row.booking_url ? { booking_url: row.booking_url } : {}),
+    ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
+    ...(row.booking_message ? { booking_message: row.booking_message } : {}),
+    display_order: row.display_order,
+    active: row.active,
+  };
+}
+
 const d = (
   id: string,
   name: string,

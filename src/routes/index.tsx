@@ -3,10 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { Phone } from "lucide-react";
 import { LevelChapter } from "@/components/hub/LevelChapter";
 import { NamTramRail } from "@/components/hub/NamTramRail";
-import { LEVELS, OFFICIAL, type Level } from "@/data/resort";
+import { type Level } from "@/data/resort";
+import { HubProvider, useHub } from "@/data/hub-context";
+import { getHubData } from "@/lib/hub.functions";
 import heavenImg from "@/assets/heaven.jpg";
 
 export const Route = createFileRoute("/")({
+  loader: () => getHubData(),
   head: () => ({
     meta: [
       { title: "InterContinental Danang — Digital Hub | Heaven to Sea" },
@@ -23,13 +26,23 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Hub,
+  component: HubRoute,
 });
+
+function HubRoute() {
+  const data = Route.useLoaderData();
+  return (
+    <HubProvider data={data}>
+      <Hub />
+    </HubProvider>
+  );
+}
 
 function Hub() {
   const [active, setActive] = useState<Level>("heaven");
   const [progress, setProgress] = useState(0);
   const journeyRef = useRef<HTMLDivElement>(null);
+  const { levels, links, contact } = useHub();
 
   useEffect(() => {
     // Continuous descent progress for the gold rail fill
@@ -54,7 +67,7 @@ function Hub() {
       },
       { rootMargin: "-45% 0px -45% 0px" },
     );
-    for (const l of LEVELS) {
+    for (const l of levels) {
       const node = document.getElementById(l.id);
       if (node) observer.observe(node);
     }
@@ -63,7 +76,7 @@ function Hub() {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [levels]);
 
   const jump = (level: Level) =>
     document.getElementById(level)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -106,7 +119,7 @@ function Hub() {
 
       {/* THE DESCENT */}
       <div ref={journeyRef}>
-        {LEVELS.map((l) => (
+        {levels.map((l) => (
           <LevelChapter key={l.id} {...l} />
         ))}
       </div>
@@ -117,15 +130,7 @@ function Hub() {
           All of InterContinental Danang
         </h2>
         <ul className="mt-8 flex flex-col divide-y divide-current/10 border-y border-current/10">
-          {([
-            ["Website", OFFICIAL.website],
-            ["Instagram", OFFICIAL.instagram],
-            ["Dining", OFFICIAL.dining],
-            ["Spa", OFFICIAL.spa],
-            ["IHG One Rewards", OFFICIAL.ihg],
-            ["Resort Map", OFFICIAL.map],
-            ["Contact", OFFICIAL.contact],
-          ] as [string, string][]).map(([label, url]) => (
+          {links.map(({ label, url }) => (
             <li key={label}>
               <a
                 href={url}
@@ -147,7 +152,7 @@ function Hub() {
 
       {/* FIXED CONCIERGE BUTTON */}
       <a
-        href={OFFICIAL.contact}
+        href={contact}
         aria-label="Call concierge"
         className="fixed bottom-5 right-3 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.55)] bg-[oklch(0.16_0.03_250/0.78)] text-[oklch(0.78_0.11_85/0.85)] shadow-[0_4px_14px_oklch(0.16_0.03_250/0.22)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.85)] hover:bg-[oklch(0.16_0.03_250/0.88)] active:scale-95"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
