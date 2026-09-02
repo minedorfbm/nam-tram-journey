@@ -67,7 +67,7 @@ function Hub() {
       },
       { rootMargin: "-45% 0px -45% 0px" },
     );
-    for (const l of LEVELS) {
+    for (const l of levels) {
       const node = document.getElementById(l.id);
       if (node) observer.observe(node);
     }
@@ -76,7 +76,7 @@ function Hub() {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [levels]);
 
   const jump = (level: Level) =>
     document.getElementById(level)?.scrollIntoView({ behavior: "smooth", block: "start" });
