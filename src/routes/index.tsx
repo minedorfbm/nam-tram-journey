@@ -42,6 +42,7 @@ function Hub() {
   const [active, setActive] = useState<Level>("heaven");
   const [progress, setProgress] = useState(0);
   const journeyRef = useRef<HTMLDivElement>(null);
+  const { levels, links, contact } = useHub();
 
   useEffect(() => {
     // Continuous descent progress for the gold rail fill
