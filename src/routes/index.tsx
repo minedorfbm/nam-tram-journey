@@ -119,7 +119,7 @@ function Hub() {
 
       {/* THE DESCENT */}
       <div ref={journeyRef}>
-        {LEVELS.map((l) => (
+        {levels.map((l) => (
           <LevelChapter key={l.id} {...l} />
         ))}
       </div>
@@ -130,15 +130,7 @@ function Hub() {
           All of InterContinental Danang
         </h2>
         <ul className="mt-8 flex flex-col divide-y divide-current/10 border-y border-current/10">
-          {([
-            ["Website", OFFICIAL.website],
-            ["Instagram", OFFICIAL.instagram],
-            ["Dining", OFFICIAL.dining],
-            ["Spa", OFFICIAL.spa],
-            ["IHG One Rewards", OFFICIAL.ihg],
-            ["Resort Map", OFFICIAL.map],
-            ["Contact", OFFICIAL.contact],
-          ] as [string, string][]).map(([label, url]) => (
+          {links.map(({ label, url }) => (
             <li key={label}>
               <a
                 href={url}
@@ -160,7 +152,7 @@ function Hub() {
 
       {/* FIXED CONCIERGE BUTTON */}
       <a
-        href={OFFICIAL.contact}
+        href={contact}
         aria-label="Call concierge"
         className="fixed bottom-5 right-3 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.55)] bg-[oklch(0.16_0.03_250/0.78)] text-[oklch(0.78_0.11_85/0.85)] shadow-[0_4px_14px_oklch(0.16_0.03_250/0.22)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.85)] hover:bg-[oklch(0.16_0.03_250/0.88)] active:scale-95"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
