@@ -3,10 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { Phone } from "lucide-react";
 import { LevelChapter } from "@/components/hub/LevelChapter";
 import { NamTramRail } from "@/components/hub/NamTramRail";
-import { LEVELS, OFFICIAL, type Level } from "@/data/resort";
+import { type Level } from "@/data/resort";
+import { HubProvider, useHub } from "@/data/hub-context";
+import { getHubData } from "@/lib/hub.functions";
 import heavenImg from "@/assets/heaven.jpg";
 
 export const Route = createFileRoute("/")({
+  loader: () => getHubData(),
   head: () => ({
     meta: [
       { title: "InterContinental Danang — Digital Hub | Heaven to Sea" },
@@ -23,8 +26,17 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Hub,
+  component: HubRoute,
 });
+
+function HubRoute() {
+  const data = Route.useLoaderData();
+  return (
+    <HubProvider data={data}>
+      <Hub />
+    </HubProvider>
+  );
+}
 
 function Hub() {
   const [active, setActive] = useState<Level>("heaven");

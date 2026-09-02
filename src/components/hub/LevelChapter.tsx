@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { CardStack } from "./CardStack";
-import { DESTINATIONS, type Level } from "@/data/resort";
+import { useHub } from "@/data/hub-context";
+import { type Level } from "@/data/resort";
 
 
 interface Props {
@@ -13,13 +14,14 @@ interface Props {
 
 export function LevelChapter({ id, title, line, image, clusters }: Props) {
   const [cluster, setCluster] = useState(clusters?.[0]);
+  const { destinations } = useHub();
 
   const all = useMemo(
     () =>
-      DESTINATIONS.filter((d) => d.active && d.level === id).sort(
-        (a, b) => a.display_order - b.display_order,
-      ),
-    [id],
+      destinations
+        .filter((d) => d.active && d.level === id)
+        .sort((a, b) => a.display_order - b.display_order),
+    [destinations, id],
   );
 
   const list = clusters ? all.filter((d) => d.cluster === cluster) : all;
