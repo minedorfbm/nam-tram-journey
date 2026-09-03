@@ -45,36 +45,62 @@ function Hub() {
   const { levels, links, contact } = useHub();
 
   useEffect(() => {
-    // Continuous descent progress for the gold rail fill
-    const onScroll = () => {
+    let raf = 0;
+    let lastProgress = -1;
+    let lastActive: Level | null = null;
+
+    // Section-aware progress: the cabin travels station to station and the
+    // gold fill always lines up exactly with the active level dot.
+    const measure = () => {
+      raf = 0;
       const el = journeyRef.current;
       if (!el) return;
-      const top = el.offsetTop;
-      const p = (window.scrollY + window.innerHeight * 0.5 - top) / el.offsetHeight;
-      setProgress(Math.min(1, Math.max(0, p)));
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+      const probe = window.scrollY + window.innerHeight * 0.5;
+      const sections = levels
+        .map((l) => document.getElementById(l.id))
+        .filter((n): n is HTMLElement => !!n);
+      if (!sections.length) return;
 
-    // Active station detection via IntersectionObserver
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id as Level);
-          }
+      const first = sections[0]!;
+      const last = sections[sections.length - 1]!;
+      if (probe < first.offsetTop) {
+        if (lastProgress !== 0) setProgress((lastProgress = 0));
+        if (lastActive !== levels[0]!.id) setActive((lastActive = levels[0]!.id));
+        return;
+      }
+      if (probe >= last.offsetTop + last.offsetHeight) {
+        if (lastProgress !== 1) setProgress((lastProgress = 1));
+        if (lastActive !== levels[levels.length - 1]!.id)
+          setActive((lastActive = levels[levels.length - 1]!.id));
+        return;
+      }
+
+      for (let i = 0; i < sections.length; i++) {
+        const s = sections[i]!;
+        const top = s.offsetTop;
+        const bottom = top + s.offsetHeight;
+        if (probe >= top && probe < bottom) {
+          const local = (probe - top) / s.offsetHeight;
+          const p = (i + local) / sections.length;
+          if (Math.abs(p - lastProgress) > 0.0005) setProgress((lastProgress = p));
+          const id = levels[i]!.id;
+          if (id !== lastActive) setActive((lastActive = id));
+          return;
         }
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    for (const l of levels) {
-      const node = document.getElementById(l.id);
-      if (node) observer.observe(node);
-    }
+      }
+    };
 
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      observer.disconnect();
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
     };
   }, [levels]);
 
