@@ -41,6 +41,7 @@ function HubRoute() {
 function Hub() {
   const [active, setActive] = useState<Level>("heaven");
   const [progress, setProgress] = useState(0);
+  const [railVisible, setRailVisible] = useState(false);
   const journeyRef = useRef<HTMLDivElement>(null);
   const { levels, links, contact } = useHub();
 
