@@ -114,7 +114,7 @@ function Hub() {
 
   return (
     <main className="bg-background text-foreground">
-      <NamTramRail active={active} progress={progress} onJump={jump} />
+      <NamTramRail active={active} progress={progress} visible={railVisible} onJump={jump} />
 
       {/* THRESHOLD */}
       <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden">
