@@ -42,12 +42,7 @@ function slotAt(pos: number): [number, number, number, number] {
   const t = pos - i;
   const a = SLOTS[i]!;
   const b = SLOTS[i + 1]!;
-  return [
-    lerp(a[0], b[0], t),
-    lerp(a[1], b[1], t),
-    lerp(a[2], b[2], t),
-    a[3],
-  ];
+  return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t), a[3]];
 }
 
 const TRAVEL = 260; // px of drag equal to one full card step

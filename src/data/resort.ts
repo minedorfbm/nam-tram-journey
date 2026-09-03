@@ -75,8 +75,7 @@ export const BOOKING_CHANNEL = {
 
 export function bookingLink(d: Destination) {
   const template =
-    d.booking_message ??
-    `Hello, I'm interested in booking ${d.name}. Could you please assist me?`;
+    d.booking_message ?? `Hello, I'm interested in booking ${d.name}. Could you please assist me?`;
   return `https://wa.me/${BOOKING_CHANNEL.destination}?text=${encodeURIComponent(template)}`;
 }
 
@@ -235,14 +234,42 @@ const d = (
 
 export const DESTINATIONS: Destination[] = [
   // HEAVEN — summit of the resort
-  d("reception", "Reception", "heaven", "service", "Arrival at the highest point of the resort.", 1),
-  d("club-lounge", "Club InterContinental Lounge", "heaven", "service", "Private lounge above the bay.", 2),
-  d("penthouses", "Heavenly Penthouses", "heaven", "accommodation", "Panoramic suites at the summit.", 3),
+  d(
+    "reception",
+    "Reception",
+    "heaven",
+    "service",
+    "Arrival at the highest point of the resort.",
+    1,
+  ),
+  d(
+    "club-lounge",
+    "Club InterContinental Lounge",
+    "heaven",
+    "service",
+    "Private lounge above the bay.",
+    2,
+  ),
+  d(
+    "penthouses",
+    "Heavenly Penthouses",
+    "heaven",
+    "accommodation",
+    "Panoramic suites at the summit.",
+    3,
+  ),
   d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 4, {
     booking_message: "Hello, I'm interested in booking The Summit. Could you please assist me?",
   }),
   d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 5),
-  d("m-club", "Conference · Cinema · M-Club", "heaven", "experience", "Gatherings, screenings, celebrations.", 6),
+  d(
+    "m-club",
+    "Conference · Cinema · M-Club",
+    "heaven",
+    "experience",
+    "Gatherings, screenings, celebrations.",
+    6,
+  ),
   d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 7),
   d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 8),
   d("nam-tram", "Nam Tram", "heaven", "service", "The funicular between the four worlds.", 9),
@@ -250,17 +277,40 @@ export const DESTINATIONS: Destination[] = [
 
   // SKY — dining and heritage terrace
   d("citron", "Citron", "sky", "restaurant", "Vietnamese cuisine in hanging nest pods.", 1, {
-    booking_message: "Hello, I would like to reserve a table at Citron. Could you please assist me?",
-  }),
-  d("la-maison-1888", "La Maison 1888", "sky", "restaurant", "MICHELIN-recognised French dining.", 2, {
     booking_message:
-      "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
+      "Hello, I would like to reserve a table at Citron. Could you please assist me?",
   }),
+  d(
+    "la-maison-1888",
+    "La Maison 1888",
+    "sky",
+    "restaurant",
+    "MICHELIN-recognised French dining.",
+    2,
+    {
+      booking_message:
+        "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
+    },
+  ),
   d("buffalo-bar", "Buffalo Bar", "sky", "bar", "Cocktails beneath the Heritage Village.", 3),
   d("wine-cellar", "The Wine Cellar", "sky", "bar", "Rare vintages in a hidden room.", 4),
   d("tingara", "Tingara", "sky", "bar", "Sunset drinks above the horizon.", 5),
-  d("heritage-village", "Heritage Village", "sky", "experience", "Vietnamese craft and architecture.", 6),
-  d("bensley-gallery", "Bensley Outsider Gallery", "sky", "gallery", "The world of the resort's architect.", 7),
+  d(
+    "heritage-village",
+    "Heritage Village",
+    "sky",
+    "experience",
+    "Vietnamese craft and architecture.",
+    6,
+  ),
+  d(
+    "bensley-gallery",
+    "Bensley Outsider Gallery",
+    "sky",
+    "gallery",
+    "The world of the resort's architect.",
+    7,
+  ),
   d("kate-mccoy", "Kate McCoy", "sky", "retail", "Contemporary resort wear.", 8),
   d("sammys", "Sammy's Boutique", "sky", "retail", "Curated pieces and keepsakes.", 9),
 
@@ -271,21 +321,42 @@ export const DESTINATIONS: Destination[] = [
       "Hello, I would like to reserve a table at Terra Mare. Could you please assist me?",
   }),
   d("b-lounge", "B Lounge", "earth", "bar", "Afternoon tea in the trees.", 2, { cluster: "EAT" }),
-  d("long-bar", "L_O_N_G Bar", "earth", "bar", "The long line above the jungle.", 3, { cluster: "EAT" }),
+  d("long-bar", "L_O_N_G Bar", "earth", "bar", "The long line above the jungle.", 3, {
+    cluster: "EAT",
+  }),
   d("soar-gym", "Soar Gym", "earth", "fitness", "Train inside the canopy.", 4, { cluster: "MOVE" }),
   d("yoga-pavilion", "Yoga Pavilion", "earth", "experience", "Breath among the leaves.", 5, {
     cluster: "MOVE",
-    booking_message: "Hello, I'm interested in booking a session at the Yoga Pavilion. Could you please assist me?",
+    booking_message:
+      "Hello, I'm interested in booking a session at the Yoga Pavilion. Could you please assist me?",
   }),
-  d("long-pool", "L_O_N_G Pool", "earth", "pool", "Green water, endless length.", 6, { cluster: "MOVE" }),
-  d("planet-trekkers", "Planet Trekkers", "earth", "kids", "A world for younger explorers.", 7, { cluster: "PLAY" }),
-  d("family-pool", "Family Pool", "earth", "pool", "Shallow, shaded, together.", 8, { cluster: "PLAY" }),
-  d("kids-pool", "Kids Pool", "earth", "pool", "Small water for small guests.", 9, { cluster: "PLAY" }),
-  d("garden-jacuzzi", "Garden Jacuzzi", "earth", "pool", "Warm water in the vegetation.", 10, { cluster: "PLAY" }),
-  d("nail-hair", "The Nail & Hair Studio", "earth", "retail", "Quiet care between swims.", 11, { cluster: "PLAY" }),
-  d("nursery", "Nursery", "earth", "kids", "Care for the youngest guests.", 12, { cluster: "PLAY" }),
-  d("organic-garden", "Organic Garden", "earth", "experience", "Where the kitchens begin.", 13, { cluster: "PLAY" }),
-  d("dia-tang", "Địa Tạng Shrine", "earth", "experience", "A pause in the hillside.", 14, { cluster: "PLAY" }),
+  d("long-pool", "L_O_N_G Pool", "earth", "pool", "Green water, endless length.", 6, {
+    cluster: "MOVE",
+  }),
+  d("planet-trekkers", "Planet Trekkers", "earth", "kids", "A world for younger explorers.", 7, {
+    cluster: "PLAY",
+  }),
+  d("family-pool", "Family Pool", "earth", "pool", "Shallow, shaded, together.", 8, {
+    cluster: "PLAY",
+  }),
+  d("kids-pool", "Kids Pool", "earth", "pool", "Small water for small guests.", 9, {
+    cluster: "PLAY",
+  }),
+  d("garden-jacuzzi", "Garden Jacuzzi", "earth", "pool", "Warm water in the vegetation.", 10, {
+    cluster: "PLAY",
+  }),
+  d("nail-hair", "The Nail & Hair Studio", "earth", "retail", "Quiet care between swims.", 11, {
+    cluster: "PLAY",
+  }),
+  d("nursery", "Nursery", "earth", "kids", "Care for the youngest guests.", 12, {
+    cluster: "PLAY",
+  }),
+  d("organic-garden", "Organic Garden", "earth", "experience", "Where the kitchens begin.", 13, {
+    cluster: "PLAY",
+  }),
+  d("dia-tang", "Địa Tạng Shrine", "earth", "experience", "A pause in the hillside.", 14, {
+    cluster: "PLAY",
+  }),
 
   // SEA — shoreline
   d("mi-sol-spa", "Mi Sol Spa & Wellness", "sea", "spa", "Sound. Stillness. Renewal.", 1, {
@@ -294,12 +365,34 @@ export const DESTINATIONS: Destination[] = [
   d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 2),
   d("coconut-beach", "Coconut Beach", "sea", "beach", "At the edge of Son Tra.", 3),
   d("family-beach", "Family Beach", "sea", "beach", "Soft sand, calm water.", 4),
-  d("club-beach", "Club InterContinental Beach", "sea", "beach", "Private shoreline for Club guests.", 5),
-  d("spa-lagoon-villas", "Spa Lagoon Villas", "sea", "accommodation", "Sleep beside still water.", 6),
-  d("sea-experiences", "Seaside Experiences", "sea", "experience", "Sunrise sailing and quiet dives.", 7, {
-    booking_message:
-      "Hello, I'm interested in booking a seaside experience. Could you please assist me?",
-  }),
+  d(
+    "club-beach",
+    "Club InterContinental Beach",
+    "sea",
+    "beach",
+    "Private shoreline for Club guests.",
+    5,
+  ),
+  d(
+    "spa-lagoon-villas",
+    "Spa Lagoon Villas",
+    "sea",
+    "accommodation",
+    "Sleep beside still water.",
+    6,
+  ),
+  d(
+    "sea-experiences",
+    "Seaside Experiences",
+    "sea",
+    "experience",
+    "Sunrise sailing and quiet dives.",
+    7,
+    {
+      booking_message:
+        "Hello, I'm interested in booking a seaside experience. Could you please assist me?",
+    },
+  ),
 ];
 
 export const GLOBAL_LINKS = [

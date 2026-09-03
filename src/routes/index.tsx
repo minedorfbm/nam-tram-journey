@@ -109,13 +109,15 @@ function Hub() {
             <br />
             the Descent
           </h1>
-          <span className="reveal line-drop h-24 w-px bg-current/40 [animation-delay:520ms]" aria-hidden />
+          <span
+            className="reveal line-drop h-24 w-px bg-current/40 [animation-delay:520ms]"
+            aria-hidden
+          />
           <span className="reveal text-[9px] tracking-[0.42em] opacity-50 [animation-delay:680ms]">
             FROM HEAVEN TO SEA
           </span>
         </button>
       </section>
-
 
       {/* THE DESCENT */}
       <div ref={journeyRef}>

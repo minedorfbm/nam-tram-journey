@@ -3,7 +3,6 @@ import { CardStack } from "./CardStack";
 import { useHub } from "@/data/hub-context";
 import { type Level } from "@/data/resort";
 
-
 interface Props {
   id: Level;
   title: string;
@@ -49,7 +48,6 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
           </h2>
           <p className="mt-5 text-[12px] tracking-[0.24em] opacity-55">{line.toUpperCase()}</p>
         </header>
-
 
         {clusters && (
           <div className="mt-10 flex gap-6 px-6">
