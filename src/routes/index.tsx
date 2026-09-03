@@ -64,6 +64,10 @@ function Hub() {
 
       const first = sections[0]!;
       const last = sections[sections.length - 1]!;
+      const visible =
+        probe >= first.offsetTop - window.innerHeight * 0.4 &&
+        window.scrollY + window.innerHeight < last.offsetTop + last.offsetHeight + window.innerHeight * 0.4;
+      setRailVisible(visible);
       if (probe < first.offsetTop) {
         if (lastProgress !== 0) setProgress((lastProgress = 0));
         if (lastActive !== levels[0]!.id) setActive((lastActive = levels[0]!.id));
