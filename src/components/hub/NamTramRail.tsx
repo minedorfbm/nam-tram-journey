@@ -26,8 +26,7 @@ export function NamTramRail({ active, progress, onJump }: Props) {
   const stationPct = (progress * 100) / 100; // continuous 0..1
   const cabinPct =
     stations[0]! +
-    (stations[stations.length - 1]! - stations[0]!) *
-      Math.min(1, Math.max(0, stationPct));
+    (stations[stations.length - 1]! - stations[0]!) * Math.min(1, Math.max(0, stationPct));
 
   return (
     <nav
@@ -89,7 +88,9 @@ export function NamTramRail({ active, progress, onJump }: Props) {
                   border: `1px solid ${isActive || passed ? GOLD : NEUTRAL}`,
                   backgroundColor: isActive ? GOLD : "transparent",
                   opacity: isActive ? 1 : passed ? 0.8 : 0.45,
-                  boxShadow: isActive ? `0 0 8px color-mix(in oklch, ${GOLD} 60%, transparent)` : "none",
+                  boxShadow: isActive
+                    ? `0 0 8px color-mix(in oklch, ${GOLD} 60%, transparent)`
+                    : "none",
                 }}
               />
             </button>

@@ -16,13 +16,7 @@ function actionHref(action: string, dest: Destination) {
 }
 
 /** Full-screen editorial detail view for one destination. */
-export function DestinationDetail({
-  dest,
-  onClose,
-}: {
-  dest: Destination;
-  onClose: () => void;
-}) {
+export function DestinationDetail({ dest, onClose }: { dest: Destination; onClose: () => void }) {
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
