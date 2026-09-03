@@ -58,13 +58,13 @@ export interface Destination {
 /** Official resort channels — configurable, no invented accounts. */
 export const OFFICIAL = {
   website: "https://www.danang.intercontinental.com/",
-  adj: "https://www.danang.intercontinental.com/",
+  adj: "https://www.danang.intercontinental.com/gallery/",
   ihg: "https://www.ihg.com/onerewards/content/us/en/home",
   instagram: "https://www.instagram.com/intercontinentaldanang/",
-  map: "https://www.danang.intercontinental.com/",
+  map: "https://www.danang.intercontinental.com/contact-us/",
   contact: "tel:+842363938888",
-  dining: "https://www.danang.intercontinental.com/",
-  spa: "https://www.danang.intercontinental.com/",
+  dining: "https://www.danang.intercontinental.com/dining/",
+  spa: "https://www.danang.intercontinental.com/spa-and-wellbeing/",
 } as const;
 
 /** Existing human booking channel (WhatsApp). Editable via CMS. */
