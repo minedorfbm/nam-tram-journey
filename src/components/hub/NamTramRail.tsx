@@ -16,7 +16,7 @@ const NEUTRAL = "oklch(0.62 0.02 80)";
  * a gold progress line that fills with the descent, and a tiny
  * stylized cabin marker travelling along it.
  */
-export function NamTramRail({ active, progress, onJump }: Props) {
+export function NamTramRail({ active, progress, visible = true, onJump }: Props) {
   const activeIndex = Math.max(
     0,
     LEVELS.findIndex((l) => l.id === active),
@@ -32,7 +32,10 @@ export function NamTramRail({ active, progress, onJump }: Props) {
   return (
     <nav
       aria-label="Nam Tram — resort levels"
-      className="fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none max-[360px]:right-2"
+      aria-hidden={!visible}
+      className={`fixed right-3 top-1/2 z-40 -translate-y-1/2 select-none transition-all duration-700 ease-out max-[360px]:right-2 ${
+        visible ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-3 opacity-0"
+      }`}
     >
       <div className="relative flex flex-col items-end gap-10 py-1">
         {/* rail line — neutral base */}
@@ -44,7 +47,7 @@ export function NamTramRail({ active, progress, onJump }: Props) {
         {/* travelled line — gold, fills continuously with scroll progress */}
         <span
           aria-hidden
-          className="absolute right-[4px] top-0 w-px transition-[height] duration-150 ease-linear"
+          className="absolute right-[4px] top-0 w-px transition-[height] duration-300 ease-out"
           style={{
             height: `${Math.min(100, Math.max(0, progress * 100))}%`,
             backgroundColor: GOLD,
@@ -54,7 +57,7 @@ export function NamTramRail({ active, progress, onJump }: Props) {
         {/* Nam Tram cabin marker — tiny, rides the rail */}
         <span
           aria-hidden
-          className="absolute right-[1.5px] h-[12px] w-[6px] rounded-[1.5px] transition-[top] duration-150 ease-linear"
+          className="absolute right-[1.5px] h-[12px] w-[6px] rounded-[1.5px] transition-[top] duration-300 ease-out"
           style={{
             top: `calc(${cabinPct}% - 6px)`,
             border: `1px solid ${GOLD}`,
