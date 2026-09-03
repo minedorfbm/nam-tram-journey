@@ -3,6 +3,7 @@ import { LEVELS, type Level } from "@/data/resort";
 interface Props {
   active: Level;
   progress: number; // 0..1 across the whole descent
+  visible?: boolean;
   onJump: (level: Level) => void;
 }
 
