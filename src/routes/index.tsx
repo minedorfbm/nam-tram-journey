@@ -187,8 +187,7 @@ function Hub() {
       <a
         href={contact}
         aria-label="Call concierge"
-        className="fixed bottom-4 right-4 z-50 flex h-9 w-9 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.22)] bg-[oklch(0.16_0.03_250/0.35)] text-[oklch(0.78_0.11_85/0.55)] shadow-[0_2px_8px_oklch(0.16_0.03_250/0.14)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.42)] hover:bg-[oklch(0.16_0.03_250/0.5)] hover:text-[oklch(0.78_0.11_85/0.75)] active:scale-95"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        className="fixed bottom-4 right-4 z-50 flex h-9 w-9 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.22)] bg-[oklch(0.16_0.03_250/0.35)] pb-0 text-[oklch(0.78_0.11_85/0.55)] shadow-[0_2px_8px_oklch(0.16_0.03_250/0.14)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.42)] hover:bg-[oklch(0.16_0.03_250/0.5)] hover:text-[oklch(0.78_0.11_85/0.75)] active:scale-95"
       >
         <Phone size={14} strokeWidth={1.3} />
       </a>
