@@ -14,6 +14,7 @@ import dGym from "@/assets/d-gym.jpg";
 import dGallery from "@/assets/d-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
+import offerEnchanted from "@/assets/offer-enchanted.jpg";
 
 /**
  * CMS-ready data layer.
@@ -136,6 +137,7 @@ const TYPE_IMAGE: Record<DestinationType, string> = {
 
 /** Specific photography overrides by destination id. */
 const IMAGE_BY_ID: Record<string, string> = {
+  "enchanted-holiday": offerEnchanted,
   citron: dCitron,
   "wine-cellar": dWine,
   tingara: dCitron,
@@ -152,6 +154,7 @@ const IMAGE_BY_ID: Record<string, string> = {
 
 /** Asset registry — maps a CMS `image_key` to the bundled photography. */
 export const ASSET_BY_KEY: Record<string, string> = {
+  "offer-enchanted": offerEnchanted,
   heaven: heavenImg,
   sky: skyImg,
   earth: earthImg,
@@ -234,6 +237,20 @@ const d = (
 
 export const DESTINATIONS: Destination[] = [
   // HEAVEN — summit of the resort
+  d(
+    "enchanted-holiday",
+    "Enchanted Holiday Escape",
+    "heaven",
+    "experience",
+    "Festive stay with breakfast, Afternoon Tea and celebratory drinks.",
+    0,
+    {
+      discover_url:
+        "https://www.danang.intercontinental.com/offers/enchanted-holiday-escape-offer-2/",
+      booking_message:
+        "Hello, I'm interested in the Enchanted Holiday Escape offer. Could you please assist me?",
+    },
+  ),
   d(
     "reception",
     "Reception",
