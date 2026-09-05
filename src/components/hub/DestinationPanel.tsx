@@ -6,6 +6,7 @@ function actionHref(action: string, dest: Destination) {
     case "MENU":
     case "TREATMENTS":
     case "ACTIVITIES":
+    case "BROCHURE":
       return dest.menu_url ?? dest.discover_url;
     case "BOOK":
       return bookingLink(dest);
@@ -14,9 +15,19 @@ function actionHref(action: string, dest: Destination) {
   }
 }
 
+/** Action list for a destination — swaps DETAILS for BROCHURE when a brochure URL exists. */
+export function actionsFor(dest: Destination, limit?: number) {
+  let list = CTA_BY_TYPE[dest.type];
+  if (dest.menu_url && !list.includes("MENU")) {
+    list = list.map((a) => (a === "DETAILS" ? "BROCHURE" : a));
+    if (!list.includes("BROCHURE")) list = [...list, "BROCHURE"];
+  }
+  return limit ? list.slice(0, limit) : list;
+}
+
 /** The single universal card used everywhere in the hub. */
 export function DestinationPanel({ dest, active }: { dest: Destination; active: boolean }) {
-  const actions = CTA_BY_TYPE[dest.type].slice(0, 3);
+  const actions = actionsFor(dest, 3);
 
   return (
     <article className="relative h-full w-full overflow-hidden rounded-[26px] bg-black shadow-[0_30px_70px_-30px_rgba(0,0,0,0.65)]">

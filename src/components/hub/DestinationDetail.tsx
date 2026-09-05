@@ -7,6 +7,7 @@ function actionHref(action: string, dest: Destination) {
     case "MENU":
     case "TREATMENTS":
     case "ACTIVITIES":
+    case "BROCHURE":
       return dest.menu_url ?? dest.discover_url ?? "#";
     case "BOOK":
       return bookingLink(dest);
