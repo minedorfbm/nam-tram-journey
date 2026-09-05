@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
-import { CTA_BY_TYPE, bookingLink, type Destination } from "@/data/resort";
+import { bookingLink, type Destination } from "@/data/resort";
+import { actionsFor } from "./DestinationPanel";
 
 function actionHref(action: string, dest: Destination) {
   switch (action) {
@@ -31,7 +32,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
     };
   }, [onClose]);
 
-  const actions = CTA_BY_TYPE[dest.type];
+  const actions = actionsFor(dest);
 
   return (
     <div
