@@ -15,6 +15,7 @@ import dGallery from "@/assets/d-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
 import offerEnchanted from "@/assets/offer-enchanted.jpg";
+import offerBensley from "@/assets/offer-bensley.jpg";
 import ihgRewards from "@/assets/ihg-rewards.jpg";
 
 /**
@@ -139,6 +140,7 @@ const TYPE_IMAGE: Record<DestinationType, string> = {
 /** Specific photography overrides by destination id. */
 const IMAGE_BY_ID: Record<string, string> = {
   "enchanted-holiday": offerEnchanted,
+  "bensley-package": offerBensley,
   "ihg-one-rewards": ihgRewards,
   citron: dCitron,
   "wine-cellar": dWine,
@@ -157,6 +159,7 @@ const IMAGE_BY_ID: Record<string, string> = {
 /** Asset registry — maps a CMS `image_key` to the bundled photography. */
 export const ASSET_BY_KEY: Record<string, string> = {
   "offer-enchanted": offerEnchanted,
+  "offer-bensley": offerBensley,
   "ihg-rewards": ihgRewards,
   heaven: heavenImg,
   sky: skyImg,
