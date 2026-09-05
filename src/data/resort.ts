@@ -16,6 +16,7 @@ import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
 import offerEnchanted from "@/assets/offer-enchanted.jpg";
 import offerBensley from "@/assets/offer-bensley.jpg";
+import offerWedding from "@/assets/offer-wedding.jpg";
 import ihgRewards from "@/assets/ihg-rewards.jpg";
 
 /**
@@ -142,6 +143,7 @@ const IMAGE_BY_ID: Record<string, string> = {
   "enchanted-holiday": offerEnchanted,
   "bensley-package": offerBensley,
   "ihg-one-rewards": ihgRewards,
+  weddings: offerWedding,
   citron: dCitron,
   "wine-cellar": dWine,
   tingara: dCitron,
@@ -160,6 +162,7 @@ const IMAGE_BY_ID: Record<string, string> = {
 export const ASSET_BY_KEY: Record<string, string> = {
   "offer-enchanted": offerEnchanted,
   "offer-bensley": offerBensley,
+  "offer-wedding": offerWedding,
   "ihg-rewards": ihgRewards,
   heaven: heavenImg,
   sky: skyImg,
@@ -286,6 +289,22 @@ export const DESTINATIONS: Destination[] = [
       instagram_url: "https://www.instagram.com/billbensley/",
       booking_message:
         "Hello, I'm interested in the Bensley Design Discovery Package. Could you please assist me?",
+    },
+  ),
+  d(
+    "weddings",
+    "Weddings & Celebrations",
+    "heaven",
+    "experience",
+    "Say 'I do' above the bay — beachfront ceremonies, bespoke receptions and honeymoon moments crafted by our wedding specialists.",
+    4,
+    {
+      discover_url: "https://www.danang.intercontinental.com/weddings/",
+      menu_url:
+        "https://www.danang.intercontinental.com/wp-content/uploads/2026/06/InterContinental-Danang-Wedding-Brochure.pdf",
+      instagram_url: "https://www.instagram.com/p/Db-zN6-Gorb/",
+      booking_message:
+        "Hello, I'm interested in planning a wedding at the resort. Could you please assist me?",
     },
   ),
   d(
