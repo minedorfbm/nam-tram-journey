@@ -313,7 +313,7 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "service",
     "Arrival at the highest point of the resort.",
-    4,
+    5,
   ),
   d(
     "penthouses",
@@ -321,9 +321,9 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "accommodation",
     "Panoramic suites at the summit.",
-    5,
+    6,
   ),
-  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 6, {
+  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 7, {
     booking_message: "Hello, I'm interested in booking The Summit. Could you please assist me?",
   }),
   d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 7),
@@ -333,7 +333,7 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "experience",
     "Gatherings, screenings, celebrations.",
-    8,
+    9,
   ),
   d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 9),
   d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 10),
