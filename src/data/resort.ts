@@ -248,7 +248,7 @@ export const DESTINATIONS: Destination[] = [
     "Enchanted Holiday Escape",
     "heaven",
     "experience",
-    "Festive stay with breakfast, Afternoon Tea and celebratory drinks.",
+    "Christmas 2026 — a festive stay with daily breakfast, Afternoon Tea, celebratory drinks and Charles's nature discovery trail.",
     0,
     {
       discover_url:
@@ -275,12 +275,26 @@ export const DESTINATIONS: Destination[] = [
     { discover_url: OFFICIAL.ihg },
   ),
   d(
+    "bensley-package",
+    "The Bensley Design Discovery Package",
+    "heaven",
+    "experience",
+    "Two nights in the Heavenly Penthouse, a private Design Tour, Champagne art viewing at the Bensley Outsider Gallery and Heavenly Afternoon Tea.",
+    3,
+    {
+      discover_url: "https://www.danang.intercontinental.com/offers/bensley-design-package/",
+      instagram_url: "https://www.instagram.com/billbensley/",
+      booking_message:
+        "Hello, I'm interested in the Bensley Design Discovery Package. Could you please assist me?",
+    },
+  ),
+  d(
     "reception",
     "Reception",
     "heaven",
     "service",
     "Arrival at the highest point of the resort.",
-    3,
+    4,
   ),
   d(
     "penthouses",
@@ -288,24 +302,24 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "accommodation",
     "Panoramic suites at the summit.",
-    4,
+    5,
   ),
-  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 5, {
+  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 6, {
     booking_message: "Hello, I'm interested in booking The Summit. Could you please assist me?",
   }),
-  d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 6),
+  d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 7),
   d(
     "m-club",
     "Conference · Cinema · M-Club",
     "heaven",
     "experience",
     "Gatherings, screenings, celebrations.",
-    7,
+    8,
   ),
-  d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 8),
-  d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 9),
-  d("nam-tram", "Nam Tram", "heaven", "service", "The funicular between the four worlds.", 10),
-  d("information", "Information Desk", "heaven", "service", "Concierge and guest assistance.", 11),
+  d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 9),
+  d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 10),
+  d("nam-tram", "Nam Tram", "heaven", "service", "The funicular between the four worlds.", 11),
+  d("information", "Information Desk", "heaven", "service", "Concierge and guest assistance.", 12),
 
   // SKY — dining and heritage terrace
   d("citron", "Citron", "sky", "restaurant", "Vietnamese cuisine in hanging nest pods.", 1, {
