@@ -15,6 +15,7 @@ import dGallery from "@/assets/d-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
 import offerEnchanted from "@/assets/offer-enchanted.jpg";
+import ihgRewards from "@/assets/ihg-rewards.jpg";
 
 /**
  * CMS-ready data layer.
@@ -138,6 +139,7 @@ const TYPE_IMAGE: Record<DestinationType, string> = {
 /** Specific photography overrides by destination id. */
 const IMAGE_BY_ID: Record<string, string> = {
   "enchanted-holiday": offerEnchanted,
+  "ihg-one-rewards": ihgRewards,
   citron: dCitron,
   "wine-cellar": dWine,
   tingara: dCitron,
@@ -155,6 +157,7 @@ const IMAGE_BY_ID: Record<string, string> = {
 /** Asset registry — maps a CMS `image_key` to the bundled photography. */
 export const ASSET_BY_KEY: Record<string, string> = {
   "offer-enchanted": offerEnchanted,
+  "ihg-rewards": ihgRewards,
   heaven: heavenImg,
   sky: skyImg,
   earth: earthImg,
@@ -252,20 +255,29 @@ export const DESTINATIONS: Destination[] = [
     },
   ),
   d(
-    "reception",
-    "Reception",
-    "heaven",
-    "service",
-    "Arrival at the highest point of the resort.",
-    1,
-  ),
-  d(
     "club-lounge",
     "Club InterContinental Lounge",
     "heaven",
     "service",
     "Private lounge above the bay.",
+    1,
+  ),
+  d(
+    "ihg-one-rewards",
+    "IHG One Rewards",
+    "heaven",
+    "service",
+    "The loyalty programme of IHG Hotels & Resorts — earn and enjoy worldwide.",
     2,
+    { discover_url: OFFICIAL.ihg },
+  ),
+  d(
+    "reception",
+    "Reception",
+    "heaven",
+    "service",
+    "Arrival at the highest point of the resort.",
+    3,
   ),
   d(
     "penthouses",
@@ -273,24 +285,24 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "accommodation",
     "Panoramic suites at the summit.",
-    3,
+    4,
   ),
-  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 4, {
+  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 5, {
     booking_message: "Hello, I'm interested in booking The Summit. Could you please assist me?",
   }),
-  d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 5),
+  d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 6),
   d(
     "m-club",
     "Conference · Cinema · M-Club",
     "heaven",
     "experience",
     "Gatherings, screenings, celebrations.",
-    6,
+    7,
   ),
-  d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 7),
-  d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 8),
-  d("nam-tram", "Nam Tram", "heaven", "service", "The funicular between the four worlds.", 9),
-  d("information", "Information Desk", "heaven", "service", "Concierge and guest assistance.", 10),
+  d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 8),
+  d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 9),
+  d("nam-tram", "Nam Tram", "heaven", "service", "The funicular between the four worlds.", 10),
+  d("information", "Information Desk", "heaven", "service", "Concierge and guest assistance.", 11),
 
   // SKY — dining and heritage terrace
   d("citron", "Citron", "sky", "restaurant", "Vietnamese cuisine in hanging nest pods.", 1, {
