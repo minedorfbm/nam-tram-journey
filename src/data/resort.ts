@@ -16,6 +16,7 @@ import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
 import offerEnchanted from "@/assets/offer-enchanted.jpg";
 import offerBensley from "@/assets/offer-bensley.jpg";
+import offerWedding from "@/assets/offer-wedding.jpg";
 import ihgRewards from "@/assets/ihg-rewards.jpg";
 
 /**
@@ -142,6 +143,7 @@ const IMAGE_BY_ID: Record<string, string> = {
   "enchanted-holiday": offerEnchanted,
   "bensley-package": offerBensley,
   "ihg-one-rewards": ihgRewards,
+  weddings: offerWedding,
   citron: dCitron,
   "wine-cellar": dWine,
   tingara: dCitron,
@@ -160,6 +162,7 @@ const IMAGE_BY_ID: Record<string, string> = {
 export const ASSET_BY_KEY: Record<string, string> = {
   "offer-enchanted": offerEnchanted,
   "offer-bensley": offerBensley,
+  "offer-wedding": offerWedding,
   "ihg-rewards": ihgRewards,
   heaven: heavenImg,
   sky: skyImg,
@@ -289,12 +292,28 @@ export const DESTINATIONS: Destination[] = [
     },
   ),
   d(
+    "weddings",
+    "Weddings & Celebrations",
+    "heaven",
+    "experience",
+    "Say 'I do' above the bay — beachfront ceremonies, bespoke receptions and honeymoon moments crafted by our wedding specialists.",
+    4,
+    {
+      discover_url: "https://www.danang.intercontinental.com/weddings/",
+      menu_url:
+        "https://www.danang.intercontinental.com/wp-content/uploads/2026/06/InterContinental-Danang-Wedding-Brochure.pdf",
+      instagram_url: "https://www.instagram.com/p/Db-zN6-Gorb/",
+      booking_message:
+        "Hello, I'm interested in planning a wedding at the resort. Could you please assist me?",
+    },
+  ),
+  d(
     "reception",
     "Reception",
     "heaven",
     "service",
     "Arrival at the highest point of the resort.",
-    4,
+    5,
   ),
   d(
     "penthouses",
@@ -302,9 +321,9 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "accommodation",
     "Panoramic suites at the summit.",
-    5,
+    6,
   ),
-  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 6, {
+  d("the-summit", "The Summit", "heaven", "experience", "Events and ceremonies in the clouds.", 7, {
     booking_message: "Hello, I'm interested in booking The Summit. Could you please assist me?",
   }),
   d("rooms", "Rooms & Villas", "heaven", "accommodation", "Bensley design, level by level.", 7),
@@ -314,7 +333,7 @@ export const DESTINATIONS: Destination[] = [
     "heaven",
     "experience",
     "Gatherings, screenings, celebrations.",
-    8,
+    9,
   ),
   d("sports-centre", "Sports Centre", "heaven", "fitness", "Tennis and mountaintop play.", 9),
   d("apec-garden", "APEC Sculpture Garden", "heaven", "gallery", "Sculpture along the ridge.", 10),
