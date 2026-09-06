@@ -6,6 +6,7 @@ import { NamTramRail } from "@/components/hub/NamTramRail";
 import { type Level } from "@/data/resort";
 import { HubProvider, useHub } from "@/data/hub-context";
 import { getHubData } from "@/lib/hub.functions";
+import { I18nProvider, LanguageSwitch, useI18n } from "@/i18n";
 import heavenImg from "@/assets/heaven.jpg";
 
 export const Route = createFileRoute("/")({
@@ -32,9 +33,11 @@ export const Route = createFileRoute("/")({
 function HubRoute() {
   const data = Route.useLoaderData();
   return (
-    <HubProvider data={data}>
-      <Hub />
-    </HubProvider>
+    <I18nProvider>
+      <HubProvider data={data}>
+        <Hub />
+      </HubProvider>
+    </I18nProvider>
   );
 }
 
@@ -44,6 +47,7 @@ function Hub() {
   const [railVisible, setRailVisible] = useState(false);
   const journeyRef = useRef<HTMLDivElement>(null);
   const { levels, links, contact } = useHub();
+  const { t, linkLabel } = useI18n();
 
   useEffect(() => {
     let raf = 0;
@@ -114,6 +118,7 @@ function Hub() {
 
   return (
     <main className="bg-background text-foreground">
+      <LanguageSwitch />
       <NamTramRail active={active} progress={progress} visible={railVisible} onJump={jump} />
 
       {/* THRESHOLD */}
@@ -133,19 +138,19 @@ function Hub() {
           className="relative flex flex-col items-center gap-6 px-6 text-center"
         >
           <span className="reveal text-[10px] tracking-[0.46em] opacity-55 [animation-delay:120ms]">
-            SUN PENINSULA · DA NANG
+            {t("hero_kicker")}
           </span>
           <h1 className="reveal font-serif text-[clamp(40px,13vw,68px)] leading-[0.92] tracking-[-0.02em] [animation-delay:260ms]">
-            Begin
+            {t("hero_title_1")}
             <br />
-            the Descent
+            {t("hero_title_2")}
           </h1>
           <span
             className="reveal line-drop h-24 w-px bg-current/40 [animation-delay:520ms]"
             aria-hidden
           />
           <span className="reveal text-[9px] tracking-[0.42em] opacity-50 [animation-delay:680ms]">
-            FROM HEAVEN TO SEA
+            {t("hero_sub")}
           </span>
         </button>
       </section>
@@ -160,7 +165,7 @@ function Hub() {
       {/* END OF JOURNEY */}
       <section className="bg-[oklch(0.16_0.03_250)] px-6 py-24 text-[oklch(0.96_0.005_90)]">
         <h2 className="font-serif text-[30px] leading-tight tracking-tight">
-          All of InterContinental Danang
+          {t("footer_title")}
         </h2>
         <ul className="mt-8 flex flex-col divide-y divide-current/10 border-y border-current/10">
           {links.map(({ label, url }) => (
@@ -171,7 +176,7 @@ function Hub() {
                 rel={label === "Contact" ? undefined : "noreferrer"}
                 className="flex items-center justify-between py-3 text-[11px] tracking-[0.22em]"
               >
-                {label.toUpperCase()}
+                {linkLabel(label).toUpperCase()}
                 <span className="opacity-40">↗</span>
               </a>
             </li>
@@ -179,14 +184,14 @@ function Hub() {
         </ul>
 
         <p className="mt-16 text-[9px] tracking-[0.3em] opacity-40">
-          DIGITAL EXPERIENCE BY ART DIGITAL JOURNEY
+          {t("footer_credit")}
         </p>
       </section>
 
       {/* FIXED CONCIERGE BUTTON */}
       <a
         href={contact}
-        aria-label="Call concierge"
+        aria-label={t("concierge")}
         className="fixed bottom-4 right-4 z-50 flex h-9 w-9 items-center justify-center rounded-full border border-[oklch(0.78_0.11_85/0.22)] bg-[oklch(0.16_0.03_250/0.35)] pb-0 text-[oklch(0.78_0.11_85/0.55)] shadow-[0_2px_8px_oklch(0.16_0.03_250/0.14)] backdrop-blur-md transition-all duration-300 ease-out hover:scale-105 hover:border-[oklch(0.78_0.11_85/0.42)] hover:bg-[oklch(0.16_0.03_250/0.5)] hover:text-[oklch(0.78_0.11_85/0.75)] active:scale-95"
       >
         <Phone size={14} strokeWidth={1.3} />
