@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
 import { bookingLink, type Destination } from "@/data/resort";
 import { actionsFor } from "./DestinationPanel";
+import { useI18n } from "@/i18n";
 
 function actionHref(action: string, dest: Destination) {
   switch (action) {
@@ -32,6 +33,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
     };
   }, [onClose]);
 
+  const { t, typeLabel, levelLabel, cluster, action, description } = useI18n();
   const actions = actionsFor(dest);
 
   return (
@@ -56,12 +58,12 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
           className="absolute left-5 top-6 flex items-center gap-2 rounded-full border border-current/25 bg-black/25 px-4 py-2 text-[9px] tracking-[0.32em] backdrop-blur-sm transition-opacity hover:opacity-70"
         >
           <ArrowLeft className="size-3" strokeWidth={1.5} />
-          BACK
+          {t("back")}
         </button>
 
         <div className="absolute inset-x-0 bottom-0 px-7 pb-8">
           <p className="text-[9px] tracking-[0.42em] opacity-70">
-            {dest.level.toUpperCase()} · {dest.type.toUpperCase()}
+            {levelLabel(dest.level)} · {typeLabel(dest.type)}
           </p>
           <h2 className="mt-4 font-serif text-[clamp(34px,10vw,52px)] leading-[0.95] tracking-[-0.01em]">
             {dest.name}
@@ -71,24 +73,24 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
 
       <div className="px-7 pb-24 pt-8">
         <p className="max-w-[38ch] font-serif text-[18px] italic leading-relaxed opacity-85">
-          {dest.short_description}
+          {description(dest.id, dest.short_description)}
         </p>
 
         <span className="mt-8 block h-px w-10 bg-current/30" aria-hidden />
 
         <dl className="mt-8 divide-y divide-current/10 border-y border-current/10 text-[10px] tracking-[0.24em]">
           <div className="flex justify-between py-3">
-            <dt className="opacity-45">LEVEL</dt>
-            <dd>{dest.level.toUpperCase()}</dd>
+            <dt className="opacity-45">{t("level")}</dt>
+            <dd>{levelLabel(dest.level)}</dd>
           </div>
           <div className="flex justify-between py-3">
-            <dt className="opacity-45">CATEGORY</dt>
-            <dd>{dest.type.toUpperCase()}</dd>
+            <dt className="opacity-45">{t("category")}</dt>
+            <dd>{typeLabel(dest.type)}</dd>
           </div>
           {dest.cluster && (
             <div className="flex justify-between py-3">
-              <dt className="opacity-45">AREA</dt>
-              <dd>{dest.cluster}</dd>
+              <dt className="opacity-45">{t("area")}</dt>
+              <dd>{cluster(dest.cluster)}</dd>
             </div>
           )}
         </dl>
@@ -102,7 +104,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
               rel="noreferrer"
               className="flex items-center justify-between border-b border-current/20 pb-3 text-[11px] tracking-[0.3em] transition-opacity hover:opacity-60"
             >
-              {a}
+              {action(a)}
               <span className="opacity-40">↗</span>
             </a>
           ))}
@@ -116,7 +118,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
               <span className="grid size-8 place-items-center rounded-full border border-current/30">
                 <Instagram className="size-3.5" strokeWidth={1.5} />
               </span>
-              INSTAGRAM
+              {t("instagram")}
             </a>
           )}
         </div>
@@ -125,7 +127,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
           onClick={onClose}
           className="mt-14 text-[10px] tracking-[0.32em] opacity-55 transition-opacity hover:opacity-90"
         >
-          ← BACK TO THE JOURNEY
+          ← {t("back_journey")}
         </button>
       </div>
     </div>

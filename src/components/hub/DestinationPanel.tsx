@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import { useI18n } from "@/i18n";
 import { CTA_BY_TYPE, bookingLink, type Destination } from "@/data/resort";
 
 function actionHref(action: string, dest: Destination) {
@@ -27,6 +28,7 @@ export function actionsFor(dest: Destination, limit?: number) {
 
 /** The single universal card used everywhere in the hub. */
 export function DestinationPanel({ dest, active }: { dest: Destination; active: boolean }) {
+  const { typeLabel, action, description } = useI18n();
   const actions = actionsFor(dest, 3);
 
   return (
@@ -48,14 +50,14 @@ export function DestinationPanel({ dest, active }: { dest: Destination; active: 
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[28%] bg-gradient-to-b from-black/40 to-transparent" />
 
       <div className="absolute inset-0 flex flex-col justify-between p-7 text-[oklch(0.98_0.005_90)]">
-        <p className="text-[9px] tracking-[0.42em] opacity-80">{dest.type.toUpperCase()}</p>
+        <p className="text-[9px] tracking-[0.42em] opacity-80">{typeLabel(dest.type)}</p>
 
         <div className={`transition-opacity duration-500 ${active ? "opacity-100" : "opacity-60"}`}>
           <h3 className="font-serif text-[clamp(28px,8.5vw,40px)] leading-[0.98] tracking-[0.01em] drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)]">
             {dest.name}
           </h3>
           <p className="mt-3 max-w-[30ch] font-serif text-[15px] italic leading-snug opacity-85">
-            {dest.short_description}
+            {description(dest.id, dest.short_description)}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
@@ -68,7 +70,7 @@ export function DestinationPanel({ dest, active }: { dest: Destination; active: 
                 tabIndex={active ? 0 : -1}
                 className="text-[10px] tracking-[0.3em] transition-opacity hover:opacity-60"
               >
-                {a}
+                {action(a)}
               </a>
             ))}
             {dest.instagram_url && (

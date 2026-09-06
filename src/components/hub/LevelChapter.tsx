@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { CardStack } from "./CardStack";
 import { useHub } from "@/data/hub-context";
 import { type Level } from "@/data/resort";
+import { useI18n } from "@/i18n";
 
 interface Props {
   id: Level;
@@ -14,6 +15,7 @@ interface Props {
 export function LevelChapter({ id, title, line, image, clusters }: Props) {
   const [cluster, setCluster] = useState(clusters?.[0]);
   const { destinations } = useHub();
+  const { t, levelLine, cluster: clusterLabel } = useI18n();
 
   const all = useMemo(
     () =>
@@ -46,7 +48,7 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
           <h2 className="mt-6 font-serif text-[clamp(56px,21vw,116px)] leading-[0.82] tracking-[-0.03em]">
             {title}
           </h2>
-          <p className="mt-5 text-[12px] tracking-[0.24em] opacity-55">{line.toUpperCase()}</p>
+          <p className="mt-5 text-[12px] tracking-[0.24em] opacity-55">{levelLine(id, line).toUpperCase()}</p>
         </header>
 
         {clusters && (
@@ -59,14 +61,14 @@ export function LevelChapter({ id, title, line, image, clusters }: Props) {
                   c === cluster ? "border-current opacity-100" : "border-transparent opacity-40"
                 }`}
               >
-                {c}
+                {clusterLabel(c)}
               </button>
             ))}
           </div>
         )}
 
         <p className="mt-10 px-6 text-[9px] tracking-[0.34em] opacity-40">
-          {list.length} PLACES · SWIPE → · TAP TO OPEN
+          {list.length} {t("places")} · {t("swipe_hint")} · {t("tap_hint")}
         </p>
 
         <div className="mt-5 overflow-hidden">
