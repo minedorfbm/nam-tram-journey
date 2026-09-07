@@ -1,5 +1,13 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { Check, ChevronDown } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   ACTION,
   CLUSTER,
@@ -85,30 +93,67 @@ export function useI18n() {
   return ctx;
 }
 
-/** Discreet language selector, fixed at the top-right of the journey. */
+/** Discreet language selector, fixed at the top-right of the journey.
+ *  Tapping the current language opens a bottom sheet with all options.
+ */
 export function LanguageSwitch() {
   const { lang, setLang, t } = useI18n();
+  const [open, setOpen] = useState(false);
+  const current = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0]!;
+
+  const select = (code: Lang) => {
+    setLang(code);
+    setOpen(false);
+  };
 
   return (
-    <nav
-      aria-label={t("language")}
-      className="fixed right-3 top-3 z-50 flex items-center gap-1 rounded-full border border-[oklch(0.78_0.11_85/0.2)] bg-[oklch(0.16_0.03_250/0.32)] px-1.5 py-1 backdrop-blur-md max-[360px]:right-2"
-    >
-      {LANGUAGES.map(({ code, label, name }) => (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
         <button
-          key={code}
-          onClick={() => setLang(code)}
-          aria-label={name}
-          aria-current={lang === code}
-          className={`rounded-full px-2 py-0.5 text-[9px] tracking-[0.18em] transition-opacity ${
-            lang === code
-              ? "bg-[oklch(0.78_0.11_85/0.16)] text-[oklch(0.86_0.1_85)] opacity-100"
-              : "text-[oklch(0.92_0.01_90)] opacity-45 hover:opacity-80"
-          }`}
+          aria-label={t("language")}
+          className="fixed right-3 top-3 z-50 flex items-center gap-1 rounded-full border border-[oklch(0.78_0.11_85/0.2)] bg-[oklch(0.16_0.03_250/0.32)] px-2.5 py-1.5 text-[oklch(0.86_0.1_85)] backdrop-blur-md transition-all hover:border-[oklch(0.78_0.11_85/0.35)] hover:bg-[oklch(0.16_0.03_250/0.45)] active:scale-95 max-[360px]:right-2"
         >
-          {label}
+          <span className="text-[10px] tracking-[0.18em]">{current.label}</span>
+          <ChevronDown size={10} strokeWidth={1.5} className="opacity-60" />
         </button>
-      ))}
-    </nav>
+      </SheetTrigger>
+
+      <SheetContent
+        side="bottom"
+        className="z-[60] rounded-t-2xl border-t border-[oklch(0.78_0.11_85/0.18)] bg-[oklch(0.16_0.03_250/0.96)] px-5 pb-8 pt-5 shadow-[0_-8px_32px_oklch(0.16_0.03_250/0.24)]"
+      >
+        <SheetHeader className="mb-5 items-center">
+          <SheetTitle className="text-[11px] font-normal uppercase tracking-[0.3em] text-[oklch(0.86_0.1_85)]">
+            {t("language")}
+          </SheetTitle>
+        </SheetHeader>
+
+        <nav aria-label={t("language")} className="flex flex-col gap-1">
+          {LANGUAGES.map(({ code, label, name }) => {
+            const active = lang === code;
+            return (
+              <button
+                key={code}
+                onClick={() => select(code)}
+                aria-current={active}
+                className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-left transition-all ${
+                  active
+                    ? "bg-[oklch(0.78_0.11_85/0.14)] text-[oklch(0.92_0.01_90)]"
+                    : "text-[oklch(0.86_0.1_85/0.72)] hover:bg-[oklch(0.78_0.11_85/0.08)] hover:text-[oklch(0.92_0.01_90)]"
+                }`}
+              >
+                <span className="flex items-baseline gap-3">
+                  <span className="w-8 text-[12px] tracking-[0.12em]">{label}</span>
+                  <span className="text-[13px] font-light tracking-wide opacity-80">{name}</span>
+                </span>
+                {active && (
+                  <Check size={16} strokeWidth={1.5} className="text-[oklch(0.86_0.1_85)]" />
+                )}
+              </button>
+            );
+          })}
+        </nav>
+      </SheetContent>
+    </Sheet>
   );
 }
