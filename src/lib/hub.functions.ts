@@ -25,7 +25,7 @@ export interface HubData {
 export const getHubData = createServerFn({ method: "GET" }).handler(async (): Promise<HubData> => {
   const url = process.env["SUPABASE_URL"];
   const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
-  if (!url || !key) return { levels: [], destinations: [], settings: {} };
+  if (!url || !key) return { levels: [], destinations: [], photos: [], settings: {} };
 
   const supabase = createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -41,7 +41,7 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
     },
   });
 
-  const [levels, destinations, settings] = await Promise.all([
+  const [levels, destinations, photos, settings] = await Promise.all([
     supabase
       .from("levels")
       .select("id, title, line, image_key, clusters, display_order")
@@ -53,12 +53,18 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
       )
       .eq("active", true)
       .order("display_order"),
+    supabase
+      .from("destination_photos")
+      .select("destination_id, image_url, caption, post_url, display_order")
+      .eq("active", true)
+      .order("display_order"),
     supabase.from("site_settings").select("key, value"),
   ]);
 
   return {
     levels: (levels.data ?? []) as LevelRow[],
     destinations: (destinations.data ?? []) as DestinationRow[],
+    photos: (photos.data ?? []) as DestinationPhotoRow[],
     settings: Object.fromEntries(
       ((settings.data ?? []) as { key: string; value: string }[]).map((s) => [s.key, s.value]),
     ),
