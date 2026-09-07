@@ -201,7 +201,53 @@ export const ASSET_BY_KEY: Record<string, string> = {
   "d-gallery": dGallery,
   "d-tram": dTram,
   "d-retail": dRetail,
+  "g-dining-detail": gDiningDetail,
+  "g-bar-detail": gBarDetail,
+  "g-architecture-detail": gArchitectureDetail,
+  "g-terrace-detail": gTerraceDetail,
 };
+
+/** Resolves a stored photo reference: either an absolute URL or an asset key. */
+export function resolveImage(ref: string): string {
+  if (/^(https?:)?\/\//.test(ref) || ref.startsWith("/")) return ref;
+  return ASSET_BY_KEY[ref] ?? "";
+}
+
+/**
+ * Bundled fallback galleries, used when the database is unreachable.
+ * Placeholder photography in the resort's visual style — to be replaced by the
+ * resort's own Instagram imagery.
+ */
+const DINING_SET = ["g-dining-detail", "g-terrace-detail", "g-architecture-detail"];
+const BAR_SET = ["g-bar-detail", "d-bar", "g-terrace-detail", "g-architecture-detail"];
+
+export const FALLBACK_PHOTOS: Record<string, string[]> = {
+  "terra-mare": ["d-french-dining", ...DINING_SET],
+  citron: ["d-citron", ...DINING_SET],
+  "la-maison-1888": ["d-french-dining", ...DINING_SET],
+  "b-lounge": BAR_SET,
+  "long-bar": BAR_SET,
+  "buffalo-bar": BAR_SET,
+  "wine-cellar": ["d-wine", "g-bar-detail", "g-dining-detail", "g-architecture-detail"],
+  tingara: ["d-citron", ...BAR_SET.slice(0, 3)],
+  "bensley-package": ["offer-bensley", "g-architecture-detail", "d-gallery", "d-villa"],
+  weddings: ["offer-wedding", "g-terrace-detail", "d-beach", "g-dining-detail"],
+};
+
+/** Groups photo rows by destination, ready to attach to a destination. */
+export function groupPhotos(rows: DestinationPhotoRow[]): Record<string, DestinationPhoto[]> {
+  const out: Record<string, DestinationPhoto[]> = {};
+  for (const row of [...rows].sort((a, b) => a.display_order - b.display_order)) {
+    const image = resolveImage(row.image_url);
+    if (!image) continue;
+    (out[row.destination_id] ??= []).push({
+      image,
+      ...(row.caption ? { caption: row.caption } : {}),
+      ...(row.post_url ? { post_url: row.post_url } : {}),
+    });
+  }
+  return out;
+}
 
 /** Row shape returned by the database (see the `destinations` table). */
 export interface DestinationRow {
