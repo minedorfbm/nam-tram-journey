@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
 import { bookingLink, type Destination } from "@/data/resort";
 import { actionsFor } from "./DestinationPanel";
+import { InstagramStrip } from "./InstagramStrip";
 import { useI18n } from "@/i18n";
 
 function actionHref(action: string, dest: Destination) {
