@@ -18,6 +18,10 @@ import offerEnchanted from "@/assets/offer-enchanted.jpg";
 import offerBensley from "@/assets/offer-bensley.jpg";
 import offerWedding from "@/assets/offer-wedding.jpg";
 import ihgRewards from "@/assets/ihg-rewards.jpg";
+import gDiningDetail from "@/assets/g-dining-detail.jpg";
+import gBarDetail from "@/assets/g-bar-detail.jpg";
+import gArchitectureDetail from "@/assets/g-architecture-detail.jpg";
+import gTerraceDetail from "@/assets/g-terrace-detail.jpg";
 
 /**
  * CMS-ready data layer.
