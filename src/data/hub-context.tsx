@@ -38,9 +38,20 @@ const FALLBACK_LINKS = [
   ["Contact", OFFICIAL.contact],
 ] as [string, string][];
 
+const withFallbackPhotos = (list: Destination[]): Destination[] =>
+  list.map((dest) => {
+    const keys = FALLBACK_PHOTOS[dest.id];
+    if (!keys) return dest;
+    const photos = keys
+      .map((key) => resolveImage(key))
+      .filter(Boolean)
+      .map((image) => ({ image }));
+    return photos.length > 0 ? { ...dest, photos } : dest;
+  });
+
 const FALLBACK: HubValue = {
   levels: LEVELS,
-  destinations: DESTINATIONS,
+  destinations: withFallbackPhotos(DESTINATIONS),
   links: FALLBACK_LINKS.map(([label, url]) => ({ label, url })),
   contact: OFFICIAL.contact,
 };
@@ -80,7 +91,9 @@ export function HubProvider({ data, children }: { data?: HubData; children: Reac
 
     return {
       levels,
-      destinations: data.destinations.map(toDestination),
+      destinations: withFallbackPhotos(
+        data.destinations.map((row) => toDestination(row, photosByDest[row.id])),
+      ),
       links: links.length > 0 ? links : FALLBACK.links,
       contact: s["contact"] ?? OFFICIAL.contact,
     };
