@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
 import { bookingLink, type Destination } from "@/data/resort";
 import { actionsFor } from "./DestinationPanel";
+import { InstagramStrip } from "./InstagramStrip";
 import { useI18n } from "@/i18n";
 
 function actionHref(action: string, dest: Destination) {
@@ -94,6 +95,14 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
             </div>
           )}
         </dl>
+
+        {dest.photos && dest.photos.length > 0 && (
+          <InstagramStrip
+            photos={dest.photos}
+            {...(dest.instagram_url ? { instagramUrl: dest.instagram_url } : {})}
+            label={t("instagram")}
+          />
+        )}
 
         <div className="mt-10 flex flex-col gap-3">
           {actions.map((a) => (

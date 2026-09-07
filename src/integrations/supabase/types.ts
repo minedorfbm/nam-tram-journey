@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      destination_photos: {
+        Row: {
+          active: boolean
+          caption: string | null
+          created_at: string
+          destination_id: string
+          display_order: number
+          id: string
+          image_url: string
+          post_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          caption?: string | null
+          created_at?: string
+          destination_id: string
+          display_order?: number
+          id?: string
+          image_url: string
+          post_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          caption?: string | null
+          created_at?: string
+          destination_id?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          post_url?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "destination_photos_destination_id_fkey"
+            columns: ["destination_id"]
+            isOneToOne: false
+            referencedRelation: "destinations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       destinations: {
         Row: {
           active: boolean

@@ -18,6 +18,10 @@ import offerEnchanted from "@/assets/offer-enchanted.jpg";
 import offerBensley from "@/assets/offer-bensley.jpg";
 import offerWedding from "@/assets/offer-wedding.jpg";
 import ihgRewards from "@/assets/ihg-rewards.jpg";
+import gDiningDetail from "@/assets/g-dining-detail.jpg";
+import gBarDetail from "@/assets/g-bar-detail.jpg";
+import gArchitectureDetail from "@/assets/g-architecture-detail.jpg";
+import gTerraceDetail from "@/assets/g-terrace-detail.jpg";
 
 /**
  * CMS-ready data layer.
@@ -55,8 +59,25 @@ export interface Destination {
   booking_url?: string;
   instagram_url?: string;
   booking_message?: string;
+  photos?: DestinationPhoto[];
   display_order: number;
   active: boolean;
+}
+
+/** One curated gallery photo shown inside a destination detail sheet. */
+export interface DestinationPhoto {
+  image: string;
+  caption?: string;
+  post_url?: string;
+}
+
+/** Row shape returned by the `destination_photos` table. */
+export interface DestinationPhotoRow {
+  destination_id: string;
+  image_url: string;
+  caption: string | null;
+  post_url: string | null;
+  display_order: number;
 }
 
 /** Official resort channels — configurable, no invented accounts. */
@@ -180,7 +201,53 @@ export const ASSET_BY_KEY: Record<string, string> = {
   "d-gallery": dGallery,
   "d-tram": dTram,
   "d-retail": dRetail,
+  "g-dining-detail": gDiningDetail,
+  "g-bar-detail": gBarDetail,
+  "g-architecture-detail": gArchitectureDetail,
+  "g-terrace-detail": gTerraceDetail,
 };
+
+/** Resolves a stored photo reference: either an absolute URL or an asset key. */
+export function resolveImage(ref: string): string {
+  if (/^(https?:)?\/\//.test(ref) || ref.startsWith("/")) return ref;
+  return ASSET_BY_KEY[ref] ?? "";
+}
+
+/**
+ * Bundled fallback galleries, used when the database is unreachable.
+ * Placeholder photography in the resort's visual style — to be replaced by the
+ * resort's own Instagram imagery.
+ */
+const DINING_SET = ["g-dining-detail", "g-terrace-detail", "g-architecture-detail"];
+const BAR_SET = ["g-bar-detail", "d-bar", "g-terrace-detail", "g-architecture-detail"];
+
+export const FALLBACK_PHOTOS: Record<string, string[]> = {
+  "terra-mare": ["d-french-dining", ...DINING_SET],
+  citron: ["d-citron", ...DINING_SET],
+  "la-maison-1888": ["d-french-dining", ...DINING_SET],
+  "b-lounge": BAR_SET,
+  "long-bar": BAR_SET,
+  "buffalo-bar": BAR_SET,
+  "wine-cellar": ["d-wine", "g-bar-detail", "g-dining-detail", "g-architecture-detail"],
+  tingara: ["d-citron", ...BAR_SET.slice(0, 3)],
+  "bensley-package": ["offer-bensley", "g-architecture-detail", "d-gallery", "d-villa"],
+  weddings: ["offer-wedding", "g-terrace-detail", "d-beach", "g-dining-detail"],
+};
+
+/** Groups photo rows by destination, ready to attach to a destination. */
+export function groupPhotos(rows: DestinationPhotoRow[]): Record<string, DestinationPhoto[]> {
+  const out: Record<string, DestinationPhoto[]> = {};
+  for (const row of [...rows].sort((a, b) => a.display_order - b.display_order)) {
+    const image = resolveImage(row.image_url);
+    if (!image) continue;
+    (out[row.destination_id] ??= []).push({
+      image,
+      ...(row.caption ? { caption: row.caption } : {}),
+      ...(row.post_url ? { post_url: row.post_url } : {}),
+    });
+  }
+  return out;
+}
 
 /** Row shape returned by the database (see the `destinations` table). */
 export interface DestinationRow {
@@ -201,7 +268,7 @@ export interface DestinationRow {
 }
 
 /** Converts a database row into the shape the components already consume. */
-export function toDestination(row: DestinationRow): Destination {
+export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]): Destination {
   const type = row.type as DestinationType;
   return {
     id: row.id,
@@ -216,6 +283,7 @@ export function toDestination(row: DestinationRow): Destination {
     ...(row.booking_url ? { booking_url: row.booking_url } : {}),
     ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
     ...(row.booking_message ? { booking_message: row.booking_message } : {}),
+    ...(photos && photos.length > 0 ? { photos } : {}),
     display_order: row.display_order,
     active: row.active,
   };
