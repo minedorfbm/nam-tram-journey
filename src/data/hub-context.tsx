@@ -74,6 +74,7 @@ export function HubProvider({ data, children }: { data?: HubData; children: Reac
       ...(l.clusters.length > 0 ? { clusters: l.clusters } : {}),
     }));
 
+    const photosByDest = groupPhotos(data.photos ?? []);
     const s = data.settings;
     const links = (
       [
