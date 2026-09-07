@@ -59,8 +59,25 @@ export interface Destination {
   booking_url?: string;
   instagram_url?: string;
   booking_message?: string;
+  photos?: DestinationPhoto[];
   display_order: number;
   active: boolean;
+}
+
+/** One curated gallery photo shown inside a destination detail sheet. */
+export interface DestinationPhoto {
+  image: string;
+  caption?: string;
+  post_url?: string;
+}
+
+/** Row shape returned by the `destination_photos` table. */
+export interface DestinationPhotoRow {
+  destination_id: string;
+  image_url: string;
+  caption: string | null;
+  post_url: string | null;
+  display_order: number;
 }
 
 /** Official resort channels — configurable, no invented accounts. */
