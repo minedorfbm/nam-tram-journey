@@ -96,6 +96,14 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
           )}
         </dl>
 
+        {dest.photos && dest.photos.length > 0 && (
+          <InstagramStrip
+            photos={dest.photos}
+            {...(dest.instagram_url ? { instagramUrl: dest.instagram_url } : {})}
+            label={t("instagram")}
+          />
+        )}
+
         <div className="mt-10 flex flex-col gap-3">
           {actions.map((a) => (
             <a
