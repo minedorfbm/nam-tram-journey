@@ -268,7 +268,7 @@ export interface DestinationRow {
 }
 
 /** Converts a database row into the shape the components already consume. */
-export function toDestination(row: DestinationRow): Destination {
+export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]): Destination {
   const type = row.type as DestinationType;
   return {
     id: row.id,
@@ -283,6 +283,7 @@ export function toDestination(row: DestinationRow): Destination {
     ...(row.booking_url ? { booking_url: row.booking_url } : {}),
     ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
     ...(row.booking_message ? { booking_message: row.booking_message } : {}),
+    ...(photos && photos.length > 0 ? { photos } : {}),
     display_order: row.display_order,
     active: row.active,
   };
