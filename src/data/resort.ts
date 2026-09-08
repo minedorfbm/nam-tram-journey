@@ -56,6 +56,8 @@ export interface Destination {
   image: string;
   discover_url?: string;
   menu_url?: string;
+  vegetarian_menu_url?: string;
+  vegan_menu_url?: string;
   booking_url?: string;
   instagram_url?: string;
   booking_message?: string;
@@ -260,6 +262,8 @@ export interface DestinationRow {
   image_key: string | null;
   discover_url: string | null;
   menu_url: string | null;
+  vegetarian_menu_url: string | null;
+  vegan_menu_url: string | null;
   booking_url: string | null;
   instagram_url: string | null;
   booking_message: string | null;
@@ -280,6 +284,8 @@ export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]):
     image: (row.image_key ? ASSET_BY_KEY[row.image_key] : undefined) ?? TYPE_IMAGE[type],
     ...(row.discover_url ? { discover_url: row.discover_url } : {}),
     ...(row.menu_url ? { menu_url: row.menu_url } : {}),
+    ...(row.vegetarian_menu_url ? { vegetarian_menu_url: row.vegetarian_menu_url } : {}),
+    ...(row.vegan_menu_url ? { vegan_menu_url: row.vegan_menu_url } : {}),
     ...(row.booking_url ? { booking_url: row.booking_url } : {}),
     ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
     ...(row.booking_message ? { booking_message: row.booking_message } : {}),
@@ -426,6 +432,10 @@ export const DESTINATIONS: Destination[] = [
         "https://www.tablecheck.com/fr/intercontinental-danang-la-maison/reserve/landing",
       menu_url:
         "https://www.danang.intercontinental.com/wp-content/uploads/2026/07/La-Maison-1888-Michelin-Dinner-Menu-Q3.26.pdf",
+      vegetarian_menu_url:
+        "https://www.danang.intercontinental.com/wp-content/uploads/2025/05/La-Maison-1888-Michelin-Vegetarian-Dinner-Menu-Q3.26.pdf",
+      vegan_menu_url:
+        "https://www.danang.intercontinental.com/wp-content/uploads/2025/05/La-Maison-1888-Michelin-Vegan-Dinner-Menu-Q3.26.pdf",
       booking_message:
         "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
     },
