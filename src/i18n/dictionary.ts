@@ -218,6 +218,8 @@ export const ACTION: Record<Lang, Record<string, string>> = {
   en: {
     DISCOVER: "DISCOVER",
     MENU: "MENU",
+    VEGETARIAN_MENU: "VEGETARIAN MENU",
+    VEGAN_MENU: "VEGAN MENU",
     BOOK: "BOOK",
     TREATMENTS: "TREATMENTS",
     ACTIVITIES: "ACTIVITIES",
@@ -230,6 +232,8 @@ export const ACTION: Record<Lang, Record<string, string>> = {
   vi: {
     DISCOVER: "KHÁM PHÁ",
     MENU: "THỰC ĐƠN",
+    VEGETARIAN_MENU: "THỰC ĐƠN CHAY",
+    VEGAN_MENU: "THỰC ĐƠN THUẦN CHAY",
     BOOK: "ĐẶT CHỖ",
     TREATMENTS: "LIỆU TRÌNH",
     ACTIVITIES: "HOẠT ĐỘNG",
@@ -242,6 +246,8 @@ export const ACTION: Record<Lang, Record<string, string>> = {
   ru: {
     DISCOVER: "ПОДРОБНЕЕ",
     MENU: "МЕНЮ",
+    VEGETARIAN_MENU: "ВЕГЕТАРИАНСКОЕ МЕНЮ",
+    VEGAN_MENU: "ВЕГАНСКОЕ МЕНЮ",
     BOOK: "ЗАБРОНИРОВАТЬ",
     TREATMENTS: "ПРОЦЕДУРЫ",
     ACTIVITIES: "АКТИВНОСТИ",
@@ -254,6 +260,8 @@ export const ACTION: Record<Lang, Record<string, string>> = {
   zh: {
     DISCOVER: "了解详情",
     MENU: "菜单",
+    VEGETARIAN_MENU: "素食菜单",
+    VEGAN_MENU: "纯素菜单",
     BOOK: "预订",
     TREATMENTS: "疗程",
     ACTIVITIES: "活动",
