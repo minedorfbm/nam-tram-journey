@@ -421,13 +421,19 @@ export const DESTINATIONS: Destination[] = [
     "MICHELIN-recognised French dining.",
     2,
     {
+      instagram_url: "https://www.instagram.com/lamaison1888",
+      booking_url:
+        "https://www.tablecheck.com/fr/intercontinental-danang-la-maison/reserve/landing",
       booking_message:
         "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
     },
   ),
   d("buffalo-bar", "Buffalo Bar", "sky", "bar", "Cocktails beneath the Heritage Village.", 3),
   d("wine-cellar", "The Wine Cellar", "sky", "bar", "Rare vintages in a hidden room.", 4),
-  d("tingara", "Tingara", "sky", "bar", "Sunset drinks above the horizon.", 5),
+  d("tingara", "Tingara", "sky", "bar", "Sunset drinks above the horizon.", 5, {
+    instagram_url: "https://www.instagram.com/tingara_modern_teppanyaki",
+    booking_url: "https://www.tablecheck.com/fr/intercontinental-danang-tingara/reserve/landing",
+  }),
   d(
     "heritage-village",
     "Heritage Village",
