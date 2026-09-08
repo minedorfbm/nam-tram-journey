@@ -23,6 +23,7 @@ export function actionsFor(dest: Destination, limit?: number) {
     list = list.map((a) => (a === "DETAILS" ? "BROCHURE" : a));
     if (!list.includes("BROCHURE")) list = [...list, "BROCHURE"];
   }
+  if (dest.booking_url && !list.includes("BOOK")) list = [...list, "BOOK"];
   return limit ? list.slice(0, limit) : list;
 }
 

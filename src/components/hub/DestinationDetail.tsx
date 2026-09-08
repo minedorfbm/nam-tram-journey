@@ -13,7 +13,7 @@ function actionHref(action: string, dest: Destination) {
     case "BROCHURE":
       return dest.menu_url ?? dest.discover_url ?? "#";
     case "BOOK":
-      return bookingLink(dest);
+      return dest.booking_url ?? bookingLink(dest);
     default:
       return dest.discover_url ?? "#";
   }
