@@ -9,6 +9,10 @@ function actionHref(action: string, dest: Destination) {
     case "ACTIVITIES":
     case "BROCHURE":
       return dest.menu_url ?? dest.discover_url;
+    case "VEGETARIAN_MENU":
+      return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url;
+    case "VEGAN_MENU":
+      return dest.vegan_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "BOOK":
       return bookingLink(dest);
     default:
@@ -24,6 +28,8 @@ export function actionsFor(dest: Destination, limit?: number) {
     if (!list.includes("BROCHURE")) list = [...list, "BROCHURE"];
   }
   if (dest.booking_url && !list.includes("BOOK")) list = [...list, "BOOK"];
+  if (dest.vegetarian_menu_url && !list.includes("VEGETARIAN_MENU")) list = [...list, "VEGETARIAN_MENU"];
+  if (dest.vegan_menu_url && !list.includes("VEGAN_MENU")) list = [...list, "VEGAN_MENU"];
   return limit ? list.slice(0, limit) : list;
 }
 
