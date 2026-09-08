@@ -49,7 +49,7 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
     supabase
       .from("destinations")
       .select(
-        "id, name, level_id, cluster, type, short_description, image_key, discover_url, menu_url, booking_url, instagram_url, booking_message, display_order, active",
+        "id, name, level_id, cluster, type, short_description, image_key, discover_url, menu_url, vegetarian_menu_url, vegan_menu_url, booking_url, instagram_url, booking_message, display_order, active",
       )
       .eq("active", true)
       .order("display_order"),
