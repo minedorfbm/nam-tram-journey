@@ -76,6 +76,8 @@ export type Database = {
           short_description: string
           type: Database["public"]["Enums"]["destination_type"]
           updated_at: string
+          vegan_menu_url: string | null
+          vegetarian_menu_url: string | null
         }
         Insert: {
           active?: boolean
@@ -94,6 +96,8 @@ export type Database = {
           short_description?: string
           type: Database["public"]["Enums"]["destination_type"]
           updated_at?: string
+          vegan_menu_url?: string | null
+          vegetarian_menu_url?: string | null
         }
         Update: {
           active?: boolean
@@ -112,6 +116,8 @@ export type Database = {
           short_description?: string
           type?: Database["public"]["Enums"]["destination_type"]
           updated_at?: string
+          vegan_menu_url?: string | null
+          vegetarian_menu_url?: string | null
         }
         Relationships: [
           {
