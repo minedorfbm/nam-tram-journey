@@ -424,6 +424,8 @@ export const DESTINATIONS: Destination[] = [
       instagram_url: "https://www.instagram.com/lamaison1888",
       booking_url:
         "https://www.tablecheck.com/fr/intercontinental-danang-la-maison/reserve/landing",
+      menu_url:
+        "https://www.danang.intercontinental.com/wp-content/uploads/2026/07/La-Maison-1888-Michelin-Dinner-Menu-Q3.26.pdf",
       booking_message:
         "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
     },
