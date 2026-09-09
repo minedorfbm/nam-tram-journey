@@ -455,7 +455,9 @@ export const DESTINATIONS: Destination[] = [
         "Hello, I would like to reserve a table at La Maison 1888. Could you please assist me?",
     },
   ),
-  d("buffalo-bar", "Buffalo Bar", "sky", "bar", "Cocktails beneath the Heritage Village.", 3),
+  d("buffalo-bar", "Buffalo Bar", "sky", "bar", "Cocktails beneath the Heritage Village.", 3, {
+    menu_url: "https://www.danang.intercontinental.com/wp-content/uploads/2023/11/Buffalo-bar-Menu-Highlight.pdf",
+  }),
   d("wine-cellar", "The Wine Cellar", "sky", "bar", "Rare vintages in a hidden room.", 4),
   d("tingara", "Tingara", "sky", "bar", "Sunset drinks above the horizon.", 5, {
     instagram_url: "https://www.instagram.com/tingara_modern_teppanyaki",
