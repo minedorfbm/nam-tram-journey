@@ -57,6 +57,7 @@ export interface Destination {
   discover_url?: string;
   menu_url?: string;
   vegetarian_menu_url?: string;
+  breakfast_menu_url?: string;
   vegan_menu_url?: string;
   lunch_menu_url?: string;
   dinner_menu_url?: string;
@@ -265,6 +266,7 @@ export interface DestinationRow {
   discover_url: string | null;
   menu_url: string | null;
   vegetarian_menu_url: string | null;
+  breakfast_menu_url: string | null;
   vegan_menu_url: string | null;
   lunch_menu_url: string | null;
   dinner_menu_url: string | null;
@@ -289,6 +291,7 @@ export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]):
     ...(row.discover_url ? { discover_url: row.discover_url } : {}),
     ...(row.menu_url ? { menu_url: row.menu_url } : {}),
     ...(row.vegetarian_menu_url ? { vegetarian_menu_url: row.vegetarian_menu_url } : {}),
+    ...(row.breakfast_menu_url ? { breakfast_menu_url: row.breakfast_menu_url } : {}),
     ...(row.vegan_menu_url ? { vegan_menu_url: row.vegan_menu_url } : {}),
     ...(row.lunch_menu_url ? { lunch_menu_url: row.lunch_menu_url } : {}),
     ...(row.dinner_menu_url ? { dinner_menu_url: row.dinner_menu_url } : {}),
@@ -422,6 +425,12 @@ export const DESTINATIONS: Destination[] = [
 
   // SKY — dining and heritage terrace
   d("citron", "Citron", "sky", "restaurant", "Vietnamese cuisine in hanging nest pods.", 1, {
+    breakfast_menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2024/06/Citron-Highlights-Breakfast.pdf",
+    lunch_menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/02/Citron-Lunch-Menu-Highlights.Feb2026.pdf",
+    dinner_menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/02/Citron-Dinner-Menu-Highlights.Feb2026.pdf",
     booking_message:
       "Hello, I would like to reserve a table at Citron. Could you please assist me?",
   }),
@@ -478,12 +487,16 @@ export const DESTINATIONS: Destination[] = [
   // EARTH — jungle level, clustered
   d("terra-mare", "Terra Mare", "earth", "restaurant", "Land and sea, all day long.", 1, {
     cluster: "EAT",
+    menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/09/Terra-Mare-A-la-carte-Menu.pdf",
     booking_message:
       "Hello, I would like to reserve a table at Terra Mare. Could you please assist me?",
   }),
   d("b-lounge", "B Lounge", "earth", "bar", "Afternoon tea in the trees.", 2, { cluster: "EAT" }),
   d("long-bar", "L_O_N_G Bar", "earth", "bar", "The long line above the jungle.", 3, {
     cluster: "EAT",
+    menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/02/Long-Bar-Menu-Highlights.Feb2026.pdf",
   }),
   d("soar-gym", "Soar Gym", "earth", "fitness", "Train inside the canopy.", 4, { cluster: "MOVE" }),
   d("yoga-pavilion", "Yoga Pavilion", "earth", "experience", "Breath among the leaves.", 5, {
