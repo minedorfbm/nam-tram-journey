@@ -16,6 +16,10 @@ function actionHref(action: string, dest: Destination) {
       return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
     case "VEGAN_MENU":
       return dest.vegan_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
+    case "LUNCH_MENU":
+      return dest.lunch_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
+    case "DINNER_MENU":
+      return dest.dinner_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
     case "BOOK":
       return dest.booking_url ?? bookingLink(dest);
     default:
