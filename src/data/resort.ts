@@ -58,6 +58,8 @@ export interface Destination {
   menu_url?: string;
   vegetarian_menu_url?: string;
   vegan_menu_url?: string;
+  lunch_menu_url?: string;
+  dinner_menu_url?: string;
   booking_url?: string;
   instagram_url?: string;
   booking_message?: string;
@@ -264,6 +266,8 @@ export interface DestinationRow {
   menu_url: string | null;
   vegetarian_menu_url: string | null;
   vegan_menu_url: string | null;
+  lunch_menu_url: string | null;
+  dinner_menu_url: string | null;
   booking_url: string | null;
   instagram_url: string | null;
   booking_message: string | null;
@@ -286,6 +290,8 @@ export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]):
     ...(row.menu_url ? { menu_url: row.menu_url } : {}),
     ...(row.vegetarian_menu_url ? { vegetarian_menu_url: row.vegetarian_menu_url } : {}),
     ...(row.vegan_menu_url ? { vegan_menu_url: row.vegan_menu_url } : {}),
+    ...(row.lunch_menu_url ? { lunch_menu_url: row.lunch_menu_url } : {}),
+    ...(row.dinner_menu_url ? { dinner_menu_url: row.dinner_menu_url } : {}),
     ...(row.booking_url ? { booking_url: row.booking_url } : {}),
     ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
     ...(row.booking_message ? { booking_message: row.booking_message } : {}),
@@ -445,6 +451,10 @@ export const DESTINATIONS: Destination[] = [
   d("tingara", "Tingara", "sky", "bar", "Sunset drinks above the horizon.", 5, {
     instagram_url: "https://www.instagram.com/tingara_modern_teppanyaki",
     booking_url: "https://www.tablecheck.com/fr/intercontinental-danang-tingara/reserve/landing",
+    lunch_menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/08/Lunch-Summer-Menu.pdf",
+    dinner_menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2026/08/Dinner-Summer-Menu.pdf",
   }),
   d(
     "heritage-village",
