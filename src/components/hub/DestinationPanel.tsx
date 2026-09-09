@@ -13,6 +13,8 @@ function actionHref(action: string, dest: Destination) {
       return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "VEGAN_MENU":
       return dest.vegan_menu_url ?? dest.menu_url ?? dest.discover_url;
+    case "BREAKFAST_MENU":
+      return dest.breakfast_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "LUNCH_MENU":
       return dest.lunch_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "DINNER_MENU":
@@ -33,8 +35,9 @@ export function actionsFor(dest: Destination, limit?: number) {
   }
   if (dest.booking_url && !list.includes("BOOK")) list = [...list, "BOOK"];
   // Lunch/dinner menus replace the generic MENU action
-  if (dest.lunch_menu_url || dest.dinner_menu_url) {
+  if (dest.breakfast_menu_url || dest.lunch_menu_url || dest.dinner_menu_url) {
     const menus = [
+      ...(dest.breakfast_menu_url ? ["BREAKFAST_MENU"] : []),
       ...(dest.lunch_menu_url ? ["LUNCH_MENU"] : []),
       ...(dest.dinner_menu_url ? ["DINNER_MENU"] : []),
     ];

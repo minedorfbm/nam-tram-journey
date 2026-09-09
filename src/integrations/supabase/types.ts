@@ -63,6 +63,7 @@ export type Database = {
           active: boolean
           booking_message: string | null
           booking_url: string | null
+          breakfast_menu_url: string | null
           cluster: string | null
           created_at: string
           dinner_menu_url: string | null
@@ -85,6 +86,7 @@ export type Database = {
           active?: boolean
           booking_message?: string | null
           booking_url?: string | null
+          breakfast_menu_url?: string | null
           cluster?: string | null
           created_at?: string
           dinner_menu_url?: string | null
@@ -107,6 +109,7 @@ export type Database = {
           active?: boolean
           booking_message?: string | null
           booking_url?: string | null
+          breakfast_menu_url?: string | null
           cluster?: string | null
           created_at?: string
           dinner_menu_url?: string | null
