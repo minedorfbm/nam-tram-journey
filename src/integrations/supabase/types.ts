@@ -65,12 +65,14 @@ export type Database = {
           booking_url: string | null
           cluster: string | null
           created_at: string
+          dinner_menu_url: string | null
           discover_url: string | null
           display_order: number
           id: string
           image_key: string | null
           instagram_url: string | null
           level_id: string
+          lunch_menu_url: string | null
           menu_url: string | null
           name: string
           short_description: string
@@ -85,12 +87,14 @@ export type Database = {
           booking_url?: string | null
           cluster?: string | null
           created_at?: string
+          dinner_menu_url?: string | null
           discover_url?: string | null
           display_order?: number
           id: string
           image_key?: string | null
           instagram_url?: string | null
           level_id: string
+          lunch_menu_url?: string | null
           menu_url?: string | null
           name: string
           short_description?: string
@@ -105,12 +109,14 @@ export type Database = {
           booking_url?: string | null
           cluster?: string | null
           created_at?: string
+          dinner_menu_url?: string | null
           discover_url?: string | null
           display_order?: number
           id?: string
           image_key?: string | null
           instagram_url?: string | null
           level_id?: string
+          lunch_menu_url?: string | null
           menu_url?: string | null
           name?: string
           short_description?: string
