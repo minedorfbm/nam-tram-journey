@@ -4,6 +4,7 @@ import { bookingLink, type Destination } from "@/data/resort";
 import { actionsFor } from "./DestinationPanel";
 import { InstagramStrip } from "./InstagramStrip";
 import { useI18n } from "@/i18n";
+import { EVENTS_BY_DESTINATION } from "@/data/events";
 
 function actionHref(action: string, dest: Destination) {
   switch (action) {
