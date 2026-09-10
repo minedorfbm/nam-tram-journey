@@ -9,6 +9,8 @@ function actionHref(action: string, dest: Destination) {
     case "ACTIVITIES":
     case "BROCHURE":
       return dest.menu_url ?? dest.discover_url;
+    case "PRICE_LIST":
+      return dest.price_list_url ?? dest.menu_url ?? dest.discover_url;
     case "VEGETARIAN_MENU":
       return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "VEGAN_MENU":
@@ -43,6 +45,7 @@ export function actionsFor(dest: Destination, limit?: number) {
     ];
     list = list.includes("MENU") ? list.flatMap((a) => (a === "MENU" ? menus : [a])) : [...list, ...menus];
   }
+  if (dest.price_list_url && !list.includes("PRICE_LIST")) list = [...list, "PRICE_LIST"];
   if (dest.vegetarian_menu_url && !list.includes("VEGETARIAN_MENU")) list = [...list, "VEGETARIAN_MENU"];
   if (dest.vegan_menu_url && !list.includes("VEGAN_MENU")) list = [...list, "VEGAN_MENU"];
   return limit ? list.slice(0, limit) : list;
