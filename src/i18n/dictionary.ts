@@ -68,6 +68,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "Gọi bộ phận hỗ trợ khách",
     language: "Ngôn ngữ",
+    events: "SỰ KIỆN ĐẶC SẮC",
+    explore_more: "KHÁM PHÁ THÊM",
   },
   ru: {
     hero_kicker: "ПОЛУОСТРОВ ШОНЧА · ДАНАНГ",
