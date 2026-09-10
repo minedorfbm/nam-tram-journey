@@ -89,6 +89,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "Позвонить консьержу",
     language: "Язык",
+    events: "ФИРМЕННЫЕ СОБЫТИЯ",
+    explore_more: "УЗНАТЬ БОЛЬШЕ",
   },
   zh: {
     hero_kicker: "山茶半岛 · 岘港",
