@@ -110,6 +110,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "联系礼宾服务",
     language: "语言",
+    events: "特色活动",
+    explore_more: "了解更多",
   },
 };
 
