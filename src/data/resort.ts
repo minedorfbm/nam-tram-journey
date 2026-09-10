@@ -56,6 +56,7 @@ export interface Destination {
   image: string;
   discover_url?: string;
   menu_url?: string;
+  price_list_url?: string;
   vegetarian_menu_url?: string;
   breakfast_menu_url?: string;
   vegan_menu_url?: string;
@@ -265,6 +266,7 @@ export interface DestinationRow {
   image_key: string | null;
   discover_url: string | null;
   menu_url: string | null;
+  price_list_url: string | null;
   vegetarian_menu_url: string | null;
   breakfast_menu_url: string | null;
   vegan_menu_url: string | null;
@@ -290,6 +292,7 @@ export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]):
     image: (row.image_key ? ASSET_BY_KEY[row.image_key] : undefined) ?? TYPE_IMAGE[type],
     ...(row.discover_url ? { discover_url: row.discover_url } : {}),
     ...(row.menu_url ? { menu_url: row.menu_url } : {}),
+    ...(row.price_list_url ? { price_list_url: row.price_list_url } : {}),
     ...(row.vegetarian_menu_url ? { vegetarian_menu_url: row.vegetarian_menu_url } : {}),
     ...(row.breakfast_menu_url ? { breakfast_menu_url: row.breakfast_menu_url } : {}),
     ...(row.vegan_menu_url ? { vegan_menu_url: row.vegan_menu_url } : {}),
@@ -536,6 +539,11 @@ export const DESTINATIONS: Destination[] = [
 
   // SEA — shoreline
   d("mi-sol-spa", "Mi Sol Spa & Wellness", "sea", "spa", "Sound. Stillness. Renewal.", 1, {
+    menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/05/Mi-Sol-Spa-menu.pdf",
+    price_list_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/12/TREATMENT-PRICE-LIST-Mi-Sol-Spa.pdf",
+    booking_url: "https://www.danang.intercontinental.com/spas/mi-sol-spa/",
     booking_message: "Hello, I'm interested in booking Mi Sol Spa. Could you please assist me?",
   }),
   d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 2),

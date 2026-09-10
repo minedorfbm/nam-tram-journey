@@ -76,6 +76,7 @@ export type Database = {
           lunch_menu_url: string | null
           menu_url: string | null
           name: string
+          price_list_url: string | null
           short_description: string
           type: Database["public"]["Enums"]["destination_type"]
           updated_at: string
@@ -99,6 +100,7 @@ export type Database = {
           lunch_menu_url?: string | null
           menu_url?: string | null
           name: string
+          price_list_url?: string | null
           short_description?: string
           type: Database["public"]["Enums"]["destination_type"]
           updated_at?: string
@@ -122,6 +124,7 @@ export type Database = {
           lunch_menu_url?: string | null
           menu_url?: string | null
           name?: string
+          price_list_url?: string | null
           short_description?: string
           type?: Database["public"]["Enums"]["destination_type"]
           updated_at?: string

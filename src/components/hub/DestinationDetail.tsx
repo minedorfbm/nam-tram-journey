@@ -13,6 +13,8 @@ function actionHref(action: string, dest: Destination) {
     case "ACTIVITIES":
     case "BROCHURE":
       return dest.menu_url ?? dest.discover_url ?? "#";
+    case "PRICE_LIST":
+      return dest.price_list_url ?? dest.menu_url ?? dest.discover_url ?? "#";
     case "VEGETARIAN_MENU":
       return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
     case "VEGAN_MENU":
