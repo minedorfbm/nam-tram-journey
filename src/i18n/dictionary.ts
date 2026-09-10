@@ -24,7 +24,9 @@ export type UIKey =
   | "area"
   | "instagram"
   | "concierge"
-  | "language";
+  | "language"
+  | "events"
+  | "explore_more";
 
 export const UI: Record<Lang, Record<UIKey, string>> = {
   en: {
