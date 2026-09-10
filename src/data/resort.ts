@@ -292,6 +292,7 @@ export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]):
     image: (row.image_key ? ASSET_BY_KEY[row.image_key] : undefined) ?? TYPE_IMAGE[type],
     ...(row.discover_url ? { discover_url: row.discover_url } : {}),
     ...(row.menu_url ? { menu_url: row.menu_url } : {}),
+    ...(row.price_list_url ? { price_list_url: row.price_list_url } : {}),
     ...(row.vegetarian_menu_url ? { vegetarian_menu_url: row.vegetarian_menu_url } : {}),
     ...(row.breakfast_menu_url ? { breakfast_menu_url: row.breakfast_menu_url } : {}),
     ...(row.vegan_menu_url ? { vegan_menu_url: row.vegan_menu_url } : {}),
