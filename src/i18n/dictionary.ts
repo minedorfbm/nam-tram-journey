@@ -24,7 +24,9 @@ export type UIKey =
   | "area"
   | "instagram"
   | "concierge"
-  | "language";
+  | "language"
+  | "events"
+  | "explore_more";
 
 export const UI: Record<Lang, Record<UIKey, string>> = {
   en: {
@@ -45,6 +47,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "Call concierge",
     language: "Language",
+    events: "SIGNATURE EVENTS",
+    explore_more: "EXPLORE MORE",
   },
   vi: {
     hero_kicker: "BÁN ĐẢO SƠN TRÀ · ĐÀ NẴNG",
@@ -64,6 +68,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "Gọi bộ phận hỗ trợ khách",
     language: "Ngôn ngữ",
+    events: "SỰ KIỆN ĐẶC SẮC",
+    explore_more: "KHÁM PHÁ THÊM",
   },
   ru: {
     hero_kicker: "ПОЛУОСТРОВ ШОНЧА · ДАНАНГ",
@@ -83,6 +89,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "Позвонить консьержу",
     language: "Язык",
+    events: "ФИРМЕННЫЕ СОБЫТИЯ",
+    explore_more: "УЗНАТЬ БОЛЬШЕ",
   },
   zh: {
     hero_kicker: "山茶半岛 · 岘港",
@@ -102,6 +110,8 @@ export const UI: Record<Lang, Record<UIKey, string>> = {
     instagram: "INSTAGRAM",
     concierge: "联系礼宾服务",
     language: "语言",
+    events: "特色活动",
+    explore_more: "了解更多",
   },
 };
 

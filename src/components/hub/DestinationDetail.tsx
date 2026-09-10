@@ -4,6 +4,7 @@ import { bookingLink, type Destination } from "@/data/resort";
 import { actionsFor } from "./DestinationPanel";
 import { InstagramStrip } from "./InstagramStrip";
 import { useI18n } from "@/i18n";
+import { EVENTS_BY_DESTINATION } from "@/data/events";
 
 function actionHref(action: string, dest: Destination) {
   switch (action) {
@@ -46,6 +47,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
 
   const { t, typeLabel, levelLabel, cluster, action, description } = useI18n();
   const actions = actionsFor(dest);
+  const events = EVENTS_BY_DESTINATION[dest.id] ?? [];
 
   return (
     <div
@@ -105,6 +107,44 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
             </div>
           )}
         </dl>
+
+        {events.length > 0 && (
+          <section className="mt-12">
+            <h3 className="text-[9px] tracking-[0.42em] opacity-50">{t("events")}</h3>
+            <div className="mt-5 flex flex-col gap-4">
+              {events.map((ev) => (
+                <article
+                  key={ev.title}
+                  className="rounded-[18px] border border-current/12 bg-current/[0.04] px-5 py-6"
+                >
+                  <p className="text-[9px] leading-relaxed tracking-[0.3em] opacity-55">
+                    {ev.schedule.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                  <h4 className="mt-4 font-serif text-[22px] leading-tight">{ev.title}</h4>
+                  <span className="mt-3 block h-px w-8 bg-current/35" aria-hidden />
+                  <p className="mt-4 max-w-[42ch] text-[13px] leading-relaxed opacity-75">
+                    {ev.description}
+                  </p>
+                  {ev.url && (
+                    <a
+                      href={ev.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-[10px] tracking-[0.3em] opacity-80 transition-opacity hover:opacity-50"
+                    >
+                      {t("explore_more")}
+                      <span className="opacity-50">↗</span>
+                    </a>
+                  )}
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         {dest.photos && dest.photos.length > 0 && (
           <InstagramStrip
