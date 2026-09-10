@@ -46,6 +46,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
 
   const { t, typeLabel, levelLabel, cluster, action, description } = useI18n();
   const actions = actionsFor(dest);
+  const events = EVENTS_BY_DESTINATION[dest.id] ?? [];
 
   return (
     <div
