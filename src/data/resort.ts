@@ -552,16 +552,26 @@ export const DESTINATIONS: Destination[] = [
     booking_url: "https://www.danang.intercontinental.com/spas/mi-sol-spa/",
     booking_message: "Hello, I'm interested in booking Mi Sol Spa. Could you please assist me?",
   }),
-  d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 2),
-  d("coconut-beach", "Coconut Beach", "sea", "beach", "At the edge of Son Tra.", 3),
-  d("family-beach", "Family Beach", "sea", "beach", "Soft sand, calm water.", 4),
+  d("nail-hair", "The Nail & Hair Studio", "sea", "service", "Quiet care between swims.", 2, {
+    discover_url: "https://www.danang.intercontinental.com/spas/nail-and-hair-studio/",
+    menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/01/The-Nail-Hair-Studio-Brochure.pdf",
+    price_list_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/07/The-Nail-Hair-Studio-Price-List.Jul2025.pdf",
+    booking_url: "https://www.danang.intercontinental.com/spas/nail-and-hair-studio/",
+    booking_message:
+      "Hello, I'm interested in booking The Nail & Hair Studio. Could you please assist me?",
+  }),
+  d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 3),
+  d("coconut-beach", "Coconut Beach", "sea", "beach", "At the edge of Son Tra.", 4),
+  d("family-beach", "Family Beach", "sea", "beach", "Soft sand, calm water.", 5),
   d(
     "club-beach",
     "Club InterContinental Beach",
     "sea",
     "beach",
     "Private shoreline for Club guests.",
-    5,
+    6,
   ),
   d(
     "spa-lagoon-villas",
@@ -569,7 +579,7 @@ export const DESTINATIONS: Destination[] = [
     "sea",
     "accommodation",
     "Sleep beside still water.",
-    6,
+    7,
   ),
   d(
     "sea-experiences",
@@ -577,7 +587,7 @@ export const DESTINATIONS: Destination[] = [
     "sea",
     "experience",
     "Sunrise sailing and quiet dives.",
-    7,
+    8,
     {
       booking_message:
         "Hello, I'm interested in booking a seaside experience. Could you please assist me?",
