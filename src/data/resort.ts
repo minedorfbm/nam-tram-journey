@@ -124,7 +124,7 @@ export const CTA_BY_TYPE: Record<DestinationType, string[]> = {
   retail: ["DISCOVER", "VISIT"],
   gallery: ["DISCOVER", "VISIT"],
   accommodation: ["DISCOVER", "DETAILS"],
-  service: ["INFO"],
+  service: ["INFO", "BOOK"],
   beach: ["INFO"],
   recreation: ["DISCOVER", "DETAILS"],
 };
