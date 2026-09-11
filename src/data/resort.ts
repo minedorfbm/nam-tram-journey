@@ -12,6 +12,7 @@ import dBeach from "@/assets/d-beach.jpg";
 import dVilla from "@/assets/d-villa.jpg";
 import dGym from "@/assets/d-gym.jpg";
 import dGallery from "@/assets/d-gallery.jpg";
+import dBensleyGallery from "@/assets/d-bensley-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
 import offerEnchanted from "@/assets/offer-enchanted.jpg";
@@ -177,7 +178,7 @@ const IMAGE_BY_ID: Record<string, string> = {
   "nam-tram": dTram,
   "the-summit": dTram,
   "apec-garden": dGallery,
-  "bensley-gallery": dGallery,
+  "bensley-gallery": dBensleyGallery,
   "organic-garden": dGallery,
   "dia-tang": dGallery,
   "yoga-pavilion": dSpa,
@@ -205,6 +206,7 @@ export const ASSET_BY_KEY: Record<string, string> = {
   "d-villa": dVilla,
   "d-gym": dGym,
   "d-gallery": dGallery,
+  "d-bensley-gallery": dBensleyGallery,
   "d-tram": dTram,
   "d-retail": dRetail,
   "g-dining-detail": gDiningDetail,
@@ -483,8 +485,12 @@ export const DESTINATIONS: Destination[] = [
     "Bensley Outsider Gallery",
     "sky",
     "gallery",
-    "The world of the resort's architect.",
+    "Bold, colourful paintings by Bill Bensley, the architect behind the resort — with Kate McCoy's high-end diamond jewelry. Open Wed–Sun.",
     7,
+    {
+      discover_url: "https://www.danang.intercontinental.com/amenities/bensley-outsider-gallery/",
+      instagram_url: "https://www.instagram.com/billbensley/",
+    },
   ),
   d("kate-mccoy", "Kate McCoy", "sky", "retail", "Contemporary resort wear.", 8),
   d("sammys", "Sammy's Boutique", "sky", "retail", "Curated pieces and keepsakes.", 9),
