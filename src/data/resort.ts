@@ -12,6 +12,7 @@ import dBeach from "@/assets/d-beach.jpg";
 import dVilla from "@/assets/d-villa.jpg";
 import dGym from "@/assets/d-gym.jpg";
 import dGallery from "@/assets/d-gallery.jpg";
+import dNailStudio from "@/assets/d-nail-studio.jpg";
 import dBensleyGallery from "@/assets/d-bensley-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
@@ -123,7 +124,7 @@ export const CTA_BY_TYPE: Record<DestinationType, string[]> = {
   retail: ["DISCOVER", "VISIT"],
   gallery: ["DISCOVER", "VISIT"],
   accommodation: ["DISCOVER", "DETAILS"],
-  service: ["INFO"],
+  service: ["INFO", "BOOK"],
   beach: ["INFO"],
   recreation: ["DISCOVER", "DETAILS"],
 };
@@ -184,6 +185,7 @@ const IMAGE_BY_ID: Record<string, string> = {
   "yoga-pavilion": dSpa,
   nursery: dSpa,
   "terra-mare": dFrenchDining,
+  "nail-hair": dNailStudio,
 };
 
 /** Asset registry — maps a CMS `image_key` to the bundled photography. */
@@ -213,6 +215,7 @@ export const ASSET_BY_KEY: Record<string, string> = {
   "g-bar-detail": gBarDetail,
   "g-architecture-detail": gArchitectureDetail,
   "g-terrace-detail": gTerraceDetail,
+  "d-nail-studio": dNailStudio,
 };
 
 /** Resolves a stored photo reference: either an absolute URL or an asset key. */
@@ -530,9 +533,6 @@ export const DESTINATIONS: Destination[] = [
   d("garden-jacuzzi", "Garden Jacuzzi", "earth", "pool", "Warm water in the vegetation.", 10, {
     cluster: "PLAY",
   }),
-  d("nail-hair", "The Nail & Hair Studio", "earth", "retail", "Quiet care between swims.", 11, {
-    cluster: "PLAY",
-  }),
   d("nursery", "Nursery", "earth", "kids", "Care for the youngest guests.", 12, {
     cluster: "PLAY",
   }),
@@ -552,16 +552,26 @@ export const DESTINATIONS: Destination[] = [
     booking_url: "https://www.danang.intercontinental.com/spas/mi-sol-spa/",
     booking_message: "Hello, I'm interested in booking Mi Sol Spa. Could you please assist me?",
   }),
-  d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 2),
-  d("coconut-beach", "Coconut Beach", "sea", "beach", "At the edge of Son Tra.", 3),
-  d("family-beach", "Family Beach", "sea", "beach", "Soft sand, calm water.", 4),
+  d("nail-hair", "The Nail & Hair Studio", "sea", "service", "Quiet care between swims.", 2, {
+    discover_url: "https://www.danang.intercontinental.com/spas/nail-and-hair-studio/",
+    menu_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/01/The-Nail-Hair-Studio-Brochure.pdf",
+    price_list_url:
+      "https://www.danang.intercontinental.com/wp-content/uploads/2025/07/The-Nail-Hair-Studio-Price-List.Jul2025.pdf",
+    booking_url: "https://www.danang.intercontinental.com/spas/nail-and-hair-studio/",
+    booking_message:
+      "Hello, I'm interested in booking The Nail & Hair Studio. Could you please assist me?",
+  }),
+  d("marine-centre", "Marine Recreation Centre", "sea", "recreation", "Explore the bay.", 3),
+  d("coconut-beach", "Coconut Beach", "sea", "beach", "At the edge of Son Tra.", 4),
+  d("family-beach", "Family Beach", "sea", "beach", "Soft sand, calm water.", 5),
   d(
     "club-beach",
     "Club InterContinental Beach",
     "sea",
     "beach",
     "Private shoreline for Club guests.",
-    5,
+    6,
   ),
   d(
     "spa-lagoon-villas",
@@ -569,7 +579,7 @@ export const DESTINATIONS: Destination[] = [
     "sea",
     "accommodation",
     "Sleep beside still water.",
-    6,
+    7,
   ),
   d(
     "sea-experiences",
@@ -577,7 +587,7 @@ export const DESTINATIONS: Destination[] = [
     "sea",
     "experience",
     "Sunrise sailing and quiet dives.",
-    7,
+    8,
     {
       booking_message:
         "Hello, I'm interested in booking a seaside experience. Could you please assist me?",
