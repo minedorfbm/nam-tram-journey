@@ -12,6 +12,7 @@ import dBeach from "@/assets/d-beach.jpg";
 import dVilla from "@/assets/d-villa.jpg";
 import dGym from "@/assets/d-gym.jpg";
 import dGallery from "@/assets/d-gallery.jpg";
+import dNailStudio from "@/assets/d-nail-studio.jpg";
 import dBensleyGallery from "@/assets/d-bensley-gallery.jpg";
 import dTram from "@/assets/d-tram.jpg";
 import dRetail from "@/assets/d-retail.jpg";
@@ -184,6 +185,7 @@ const IMAGE_BY_ID: Record<string, string> = {
   "yoga-pavilion": dSpa,
   nursery: dSpa,
   "terra-mare": dFrenchDining,
+  "nail-hair": dNailStudio,
 };
 
 /** Asset registry — maps a CMS `image_key` to the bundled photography. */
@@ -213,6 +215,7 @@ export const ASSET_BY_KEY: Record<string, string> = {
   "g-bar-detail": gBarDetail,
   "g-architecture-detail": gArchitectureDetail,
   "g-terrace-detail": gTerraceDetail,
+  "d-nail-studio": dNailStudio,
 };
 
 /** Resolves a stored photo reference: either an absolute URL or an asset key. */
@@ -528,9 +531,6 @@ export const DESTINATIONS: Destination[] = [
     cluster: "PLAY",
   }),
   d("garden-jacuzzi", "Garden Jacuzzi", "earth", "pool", "Warm water in the vegetation.", 10, {
-    cluster: "PLAY",
-  }),
-  d("nail-hair", "The Nail & Hair Studio", "earth", "retail", "Quiet care between swims.", 11, {
     cluster: "PLAY",
   }),
   d("nursery", "Nursery", "earth", "kids", "Care for the youngest guests.", 12, {
