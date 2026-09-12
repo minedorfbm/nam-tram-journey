@@ -1,6 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
-import type { DestinationPhotoRow, DestinationRow } from "@/data/resort";
+import type {
+  DestinationEventRow,
+  DestinationLinkRow,
+  DestinationPhotoRow,
+  DestinationRow,
+} from "@/data/resort";
 
 export interface LevelRow {
   id: string;
@@ -15,6 +20,8 @@ export interface HubData {
   levels: LevelRow[];
   destinations: DestinationRow[];
   photos: DestinationPhotoRow[];
+  links: DestinationLinkRow[];
+  events: DestinationEventRow[];
   settings: Record<string, string>;
 }
 
