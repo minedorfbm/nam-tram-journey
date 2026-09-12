@@ -32,7 +32,8 @@ export interface HubData {
 export const getHubData = createServerFn({ method: "GET" }).handler(async (): Promise<HubData> => {
   const url = process.env["SUPABASE_URL"];
   const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
-  if (!url || !key) return { levels: [], destinations: [], photos: [], settings: {} };
+  if (!url || !key)
+    return { levels: [], destinations: [], photos: [], links: [], events: [], settings: {} };
 
   const supabase = createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -48,7 +49,7 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
     },
   });
 
-  const [levels, destinations, photos, settings] = await Promise.all([
+  const [levels, destinations, photos, links, events, settings] = await Promise.all([
     supabase
       .from("levels")
       .select("id, title, line, image_key, clusters, display_order")
@@ -56,13 +57,23 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
     supabase
       .from("destinations")
       .select(
-        "id, name, level_id, cluster, type, short_description, image_key, discover_url, menu_url, breakfast_menu_url, vegetarian_menu_url, vegan_menu_url, lunch_menu_url, dinner_menu_url, booking_url, instagram_url, booking_message, display_order, active",
+        "id, name, level_id, cluster, type, short_description, image_key, discover_url, menu_url, price_list_url, breakfast_menu_url, vegetarian_menu_url, vegan_menu_url, lunch_menu_url, dinner_menu_url, booking_url, instagram_url, booking_message, display_order, active",
       )
       .eq("active", true)
       .order("display_order"),
     supabase
       .from("destination_photos")
       .select("destination_id, image_url, caption, post_url, display_order")
+      .eq("active", true)
+      .order("display_order"),
+    supabase
+      .from("destination_links")
+      .select("destination_id, kind, label, url, display_order")
+      .eq("active", true)
+      .order("display_order"),
+    supabase
+      .from("destination_events")
+      .select("destination_id, title, schedule, description, url, display_order")
       .eq("active", true)
       .order("display_order"),
     supabase.from("site_settings").select("key, value"),
@@ -72,6 +83,8 @@ export const getHubData = createServerFn({ method: "GET" }).handler(async (): Pr
     levels: (levels.data ?? []) as LevelRow[],
     destinations: (destinations.data ?? []) as DestinationRow[],
     photos: (photos.data ?? []) as DestinationPhotoRow[],
+    links: (links.data ?? []) as DestinationLinkRow[],
+    events: (events.data ?? []) as DestinationEventRow[],
     settings: Object.fromEntries(
       ((settings.data ?? []) as { key: string; value: string }[]).map((s) => [s.key, s.value]),
     ),
