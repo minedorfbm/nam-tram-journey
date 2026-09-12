@@ -23,7 +23,8 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
 
   const { t, typeLabel, levelLabel, cluster, action, description } = useI18n();
   const actions = actionsFor(dest);
-  const events = EVENTS_BY_DESTINATION[dest.id] ?? [];
+  const events = dest.events ?? EVENTS_BY_DESTINATION[dest.id] ?? [];
+  const instagram = instagramUrl(dest);
 
   return (
     <div
@@ -125,7 +126,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
         {dest.photos && dest.photos.length > 0 && (
           <InstagramStrip
             photos={dest.photos}
-            {...(dest.instagram_url ? { instagramUrl: dest.instagram_url } : {})}
+            {...(instagram ? { instagramUrl: instagram } : {})}
             label={t("instagram")}
           />
         )}
@@ -143,9 +144,9 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
               <span className="opacity-40">↗</span>
             </a>
           ))}
-          {dest.instagram_url && (
+          {instagram && (
             <a
-              href={dest.instagram_url}
+              href={instagram}
               target="_blank"
               rel="noreferrer"
               className="mt-4 inline-flex items-center gap-3 text-[10px] tracking-[0.3em] opacity-75 transition-opacity hover:opacity-50"
