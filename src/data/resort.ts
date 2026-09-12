@@ -24,6 +24,9 @@ import gDiningDetail from "@/assets/g-dining-detail.jpg";
 import gBarDetail from "@/assets/g-bar-detail.jpg";
 import gArchitectureDetail from "@/assets/g-architecture-detail.jpg";
 import gTerraceDetail from "@/assets/g-terrace-detail.jpg";
+import type { DestinationEvent } from "@/data/events";
+
+export type { DestinationEvent };
 
 /**
  * CMS-ready data layer.
@@ -370,6 +373,8 @@ export function toDestination(
     ...(row.instagram_url ? { instagram_url: row.instagram_url } : {}),
     ...(row.booking_message ? { booking_message: row.booking_message } : {}),
     ...(photos && photos.length > 0 ? { photos } : {}),
+    ...(links && links.length > 0 ? { links } : {}),
+    ...(events && events.length > 0 ? { events } : {}),
     display_order: row.display_order,
     active: row.active,
   };
