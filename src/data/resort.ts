@@ -68,8 +68,38 @@ export interface Destination {
   instagram_url?: string;
   booking_message?: string;
   photos?: DestinationPhoto[];
+  /** Flexible link list from the database (menus, brochures, price lists…). */
+  links?: DestinationLink[];
+  /** Recurring events from the database. */
+  events?: DestinationEvent[];
   display_order: number;
   active: boolean;
+}
+
+/** One action link attached to a destination. */
+export interface DestinationLink {
+  kind: string;
+  label?: string;
+  url: string;
+}
+
+/** Row shape returned by the `destination_links` table. */
+export interface DestinationLinkRow {
+  destination_id: string;
+  kind: string;
+  label: string | null;
+  url: string;
+  display_order: number;
+}
+
+/** Row shape returned by the `destination_events` table. */
+export interface DestinationEventRow {
+  destination_id: string;
+  title: string;
+  schedule: string[];
+  description: string;
+  url: string | null;
+  display_order: number;
 }
 
 /** One curated gallery photo shown inside a destination detail sheet. */
@@ -284,8 +314,41 @@ export interface DestinationRow {
   active: boolean;
 }
 
+/** Groups link rows by destination, in display order. */
+export function groupLinks(rows: DestinationLinkRow[]): Record<string, DestinationLink[]> {
+  const out: Record<string, DestinationLink[]> = {};
+  for (const row of [...rows].sort((a, b) => a.display_order - b.display_order)) {
+    if (!row.url) continue;
+    (out[row.destination_id] ??= []).push({
+      kind: row.kind,
+      url: row.url,
+      ...(row.label ? { label: row.label } : {}),
+    });
+  }
+  return out;
+}
+
+/** Groups event rows by destination, in display order. */
+export function groupEvents(rows: DestinationEventRow[]): Record<string, DestinationEvent[]> {
+  const out: Record<string, DestinationEvent[]> = {};
+  for (const row of [...rows].sort((a, b) => a.display_order - b.display_order)) {
+    (out[row.destination_id] ??= []).push({
+      title: row.title,
+      schedule: row.schedule ?? [],
+      description: row.description,
+      ...(row.url ? { url: row.url } : {}),
+    });
+  }
+  return out;
+}
+
 /** Converts a database row into the shape the components already consume. */
-export function toDestination(row: DestinationRow, photos?: DestinationPhoto[]): Destination {
+export function toDestination(
+  row: DestinationRow,
+  photos?: DestinationPhoto[],
+  links?: DestinationLink[],
+  events?: DestinationEvent[],
+): Destination {
   const type = row.type as DestinationType;
   return {
     id: row.id,
