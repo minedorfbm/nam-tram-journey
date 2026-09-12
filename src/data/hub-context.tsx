@@ -3,6 +3,8 @@ import {
   ASSET_BY_KEY,
   DESTINATIONS,
   FALLBACK_PHOTOS,
+  groupEvents,
+  groupLinks,
   groupPhotos,
   LEVELS,
   OFFICIAL,
@@ -11,6 +13,7 @@ import {
   type Destination,
   type Level,
 } from "@/data/resort";
+import { EVENTS_BY_DESTINATION } from "@/data/events";
 import type { HubData } from "@/lib/hub.functions";
 
 export interface HubLevel {
@@ -75,6 +78,8 @@ export function HubProvider({ data, children }: { data?: HubData; children: Reac
     }));
 
     const photosByDest = groupPhotos(data.photos ?? []);
+    const linksByDest = groupLinks(data.links ?? []);
+    const eventsByDest = groupEvents(data.events ?? []);
     const s = data.settings;
     const links = (
       [
