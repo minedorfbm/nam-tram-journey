@@ -145,9 +145,9 @@ export function DestinationPanel({ dest, active }: { dest: Destination; active: 
                 {action(a)}
               </a>
             ))}
-            {dest.instagram_url && (
+            {instagramUrl(dest) && (
               <a
-                href={dest.instagram_url}
+                href={instagramUrl(dest)}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${dest.name} on Instagram`}
