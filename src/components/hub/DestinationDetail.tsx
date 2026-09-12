@@ -1,36 +1,10 @@
 import { useEffect } from "react";
 import { ArrowLeft, Instagram } from "lucide-react";
-import { bookingLink, type Destination } from "@/data/resort";
-import { actionsFor } from "./DestinationPanel";
+import type { Destination } from "@/data/resort";
+import { actionHref, actionsFor, instagramUrl } from "./DestinationPanel";
 import { InstagramStrip } from "./InstagramStrip";
 import { useI18n } from "@/i18n";
 import { EVENTS_BY_DESTINATION } from "@/data/events";
-
-function actionHref(action: string, dest: Destination) {
-  switch (action) {
-    case "MENU":
-    case "TREATMENTS":
-    case "ACTIVITIES":
-    case "BROCHURE":
-      return dest.menu_url ?? dest.discover_url ?? "#";
-    case "PRICE_LIST":
-      return dest.price_list_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "VEGETARIAN_MENU":
-      return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "VEGAN_MENU":
-      return dest.vegan_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "BREAKFAST_MENU":
-      return dest.breakfast_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "LUNCH_MENU":
-      return dest.lunch_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "DINNER_MENU":
-      return dest.dinner_menu_url ?? dest.menu_url ?? dest.discover_url ?? "#";
-    case "BOOK":
-      return dest.booking_url ?? bookingLink(dest);
-    default:
-      return dest.discover_url ?? "#";
-  }
-}
 
 /** Full-screen editorial detail view for one destination. */
 export function DestinationDetail({ dest, onClose }: { dest: Destination; onClose: () => void }) {
@@ -49,7 +23,8 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
 
   const { t, typeLabel, levelLabel, cluster, action, description } = useI18n();
   const actions = actionsFor(dest);
-  const events = EVENTS_BY_DESTINATION[dest.id] ?? [];
+  const events = dest.events ?? EVENTS_BY_DESTINATION[dest.id] ?? [];
+  const instagram = instagramUrl(dest);
 
   return (
     <div
@@ -151,7 +126,7 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
         {dest.photos && dest.photos.length > 0 && (
           <InstagramStrip
             photos={dest.photos}
-            {...(dest.instagram_url ? { instagramUrl: dest.instagram_url } : {})}
+            {...(instagram ? { instagramUrl: instagram } : {})}
             label={t("instagram")}
           />
         )}
@@ -169,9 +144,9 @@ export function DestinationDetail({ dest, onClose }: { dest: Destination; onClos
               <span className="opacity-40">↗</span>
             </a>
           ))}
-          {dest.instagram_url && (
+          {instagram && (
             <a
-              href={dest.instagram_url}
+              href={instagram}
               target="_blank"
               rel="noreferrer"
               className="mt-4 inline-flex items-center gap-3 text-[10px] tracking-[0.3em] opacity-75 transition-opacity hover:opacity-50"

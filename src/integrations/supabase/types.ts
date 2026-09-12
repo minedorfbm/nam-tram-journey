@@ -14,6 +14,97 @@ export type Database = {
   }
   public: {
     Tables: {
+      destination_events: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string
+          destination_id: string
+          display_order: number
+          id: string
+          schedule: string[]
+          title: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          destination_id: string
+          display_order?: number
+          id?: string
+          schedule?: string[]
+          title: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          destination_id?: string
+          display_order?: number
+          id?: string
+          schedule?: string[]
+          title?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "destination_events_destination_id_fkey"
+            columns: ["destination_id"]
+            isOneToOne: false
+            referencedRelation: "destinations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      destination_links: {
+        Row: {
+          active: boolean
+          created_at: string
+          destination_id: string
+          display_order: number
+          id: string
+          kind: Database["public"]["Enums"]["destination_link_type"]
+          label: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          destination_id: string
+          display_order?: number
+          id?: string
+          kind: Database["public"]["Enums"]["destination_link_type"]
+          label?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          destination_id?: string
+          display_order?: number
+          id?: string
+          kind?: Database["public"]["Enums"]["destination_link_type"]
+          label?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "destination_links_destination_id_fkey"
+            columns: ["destination_id"]
+            isOneToOne: false
+            referencedRelation: "destinations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       destination_photos: {
         Row: {
           active: boolean
@@ -209,6 +300,25 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      destination_link_type:
+        | "DISCOVER"
+        | "INFO"
+        | "DETAILS"
+        | "MENU"
+        | "BREAKFAST_MENU"
+        | "LUNCH_MENU"
+        | "DINNER_MENU"
+        | "VEGETARIAN_MENU"
+        | "VEGAN_MENU"
+        | "PRICE_LIST"
+        | "BROCHURE"
+        | "TREATMENTS"
+        | "ACTIVITIES"
+        | "BOOK"
+        | "INSTAGRAM"
+        | "VISIT"
+        | "HOURS"
+        | "WEBSITE"
       destination_type:
         | "restaurant"
         | "bar"
@@ -350,6 +460,26 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      destination_link_type: [
+        "DISCOVER",
+        "INFO",
+        "DETAILS",
+        "MENU",
+        "BREAKFAST_MENU",
+        "LUNCH_MENU",
+        "DINNER_MENU",
+        "VEGETARIAN_MENU",
+        "VEGAN_MENU",
+        "PRICE_LIST",
+        "BROCHURE",
+        "TREATMENTS",
+        "ACTIVITIES",
+        "BOOK",
+        "INSTAGRAM",
+        "VISIT",
+        "HOURS",
+        "WEBSITE",
+      ],
       destination_type: [
         "restaurant",
         "bar",
