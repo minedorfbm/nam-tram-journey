@@ -2,52 +2,99 @@ import { Instagram } from "lucide-react";
 import { useI18n } from "@/i18n";
 import { CTA_BY_TYPE, bookingLink, type Destination } from "@/data/resort";
 
-function actionHref(action: string, dest: Destination) {
+/** Resolves a link kind from the database list, falling back to the legacy columns. */
+export function linkUrl(dest: Destination, kind: string): string | undefined {
+  const fromDb = dest.links?.find((l) => l.kind === kind)?.url;
+  if (fromDb) return fromDb;
+  const legacy: Record<string, string | undefined> = {
+    DISCOVER: dest.discover_url,
+    MENU: dest.menu_url,
+    BROCHURE: dest.menu_url,
+    TREATMENTS: dest.menu_url,
+    ACTIVITIES: dest.menu_url,
+    PRICE_LIST: dest.price_list_url,
+    VEGETARIAN_MENU: dest.vegetarian_menu_url,
+    VEGAN_MENU: dest.vegan_menu_url,
+    BREAKFAST_MENU: dest.breakfast_menu_url,
+    LUNCH_MENU: dest.lunch_menu_url,
+    DINNER_MENU: dest.dinner_menu_url,
+    BOOK: dest.booking_url,
+    INSTAGRAM: dest.instagram_url,
+  };
+  return legacy[kind];
+}
+
+/** Every link kind available for a destination (database first, legacy columns as backup). */
+export function linkKinds(dest: Destination): string[] {
+  const kinds = new Set<string>(dest.links?.map((l) => l.kind) ?? []);
+  for (const kind of [
+    "DISCOVER",
+    "MENU",
+    "PRICE_LIST",
+    "VEGETARIAN_MENU",
+    "VEGAN_MENU",
+    "BREAKFAST_MENU",
+    "LUNCH_MENU",
+    "DINNER_MENU",
+    "BOOK",
+    "INSTAGRAM",
+  ]) {
+    if (linkUrl(dest, kind)) kinds.add(kind);
+  }
+  return [...kinds];
+}
+
+export function instagramUrl(dest: Destination) {
+  return linkUrl(dest, "INSTAGRAM");
+}
+
+export function actionHref(action: string, dest: Destination) {
+  const direct = linkUrl(dest, action);
+  if (direct) return direct;
   switch (action) {
     case "MENU":
     case "TREATMENTS":
     case "ACTIVITIES":
     case "BROCHURE":
-      return dest.menu_url ?? dest.discover_url;
+      return linkUrl(dest, "MENU") ?? linkUrl(dest, "DISCOVER");
     case "PRICE_LIST":
-      return dest.price_list_url ?? dest.menu_url ?? dest.discover_url;
     case "VEGETARIAN_MENU":
-      return dest.vegetarian_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "VEGAN_MENU":
-      return dest.vegan_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "BREAKFAST_MENU":
-      return dest.breakfast_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "LUNCH_MENU":
-      return dest.lunch_menu_url ?? dest.menu_url ?? dest.discover_url;
     case "DINNER_MENU":
-      return dest.dinner_menu_url ?? dest.menu_url ?? dest.discover_url;
+      return linkUrl(dest, "MENU") ?? linkUrl(dest, "DISCOVER");
     case "BOOK":
       return bookingLink(dest);
     default:
-      return dest.discover_url;
+      return linkUrl(dest, "DISCOVER");
   }
 }
 
-/** Action list for a destination — swaps DETAILS for BROCHURE when a brochure URL exists. */
+/** Action list for a destination — built from the links stored in the database. */
 export function actionsFor(dest: Destination, limit?: number) {
+  const has = (kind: string) => Boolean(linkUrl(dest, kind));
   let list = CTA_BY_TYPE[dest.type];
-  if (dest.menu_url && !list.includes("MENU")) {
+  if (has("MENU") && !list.includes("MENU")) {
     list = list.map((a) => (a === "DETAILS" ? "BROCHURE" : a));
     if (!list.includes("BROCHURE")) list = [...list, "BROCHURE"];
   }
-  if (dest.booking_url && !list.includes("BOOK")) list = [...list, "BOOK"];
-  // Lunch/dinner menus replace the generic MENU action
-  if (dest.breakfast_menu_url || dest.lunch_menu_url || dest.dinner_menu_url) {
-    const menus = [
-      ...(dest.breakfast_menu_url ? ["BREAKFAST_MENU"] : []),
-      ...(dest.lunch_menu_url ? ["LUNCH_MENU"] : []),
-      ...(dest.dinner_menu_url ? ["DINNER_MENU"] : []),
-    ];
-    list = list.includes("MENU") ? list.flatMap((a) => (a === "MENU" ? menus : [a])) : [...list, ...menus];
+  if (has("BOOK") && !list.includes("BOOK")) list = [...list, "BOOK"];
+  // Meal-specific menus replace the generic MENU action
+  const menus = [
+    ...(has("BREAKFAST_MENU") ? ["BREAKFAST_MENU"] : []),
+    ...(has("LUNCH_MENU") ? ["LUNCH_MENU"] : []),
+    ...(has("DINNER_MENU") ? ["DINNER_MENU"] : []),
+  ];
+  if (menus.length > 0) {
+    list = list.includes("MENU")
+      ? list.flatMap((a) => (a === "MENU" ? menus : [a]))
+      : [...list, ...menus];
   }
-  if (dest.price_list_url && !list.includes("PRICE_LIST")) list = [...list, "PRICE_LIST"];
-  if (dest.vegetarian_menu_url && !list.includes("VEGETARIAN_MENU")) list = [...list, "VEGETARIAN_MENU"];
-  if (dest.vegan_menu_url && !list.includes("VEGAN_MENU")) list = [...list, "VEGAN_MENU"];
+  if (has("PRICE_LIST") && !list.includes("PRICE_LIST")) list = [...list, "PRICE_LIST"];
+  if (has("VEGETARIAN_MENU") && !list.includes("VEGETARIAN_MENU"))
+    list = [...list, "VEGETARIAN_MENU"];
+  if (has("VEGAN_MENU") && !list.includes("VEGAN_MENU")) list = [...list, "VEGAN_MENU"];
   return limit ? list.slice(0, limit) : list;
 }
 
